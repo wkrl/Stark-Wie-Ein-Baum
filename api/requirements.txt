@@ -17,3 +17,4 @@ simplejson
 Flask-OAuth
 flask_admin
 python-dotenv
+pytest
