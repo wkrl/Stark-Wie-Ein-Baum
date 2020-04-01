@@ -1,5 +1,5 @@
-__pycache__/
-.vscode/
+tests/
+scripts/
 .idea/
-*.pyc
-venv/
+k8s/
+
