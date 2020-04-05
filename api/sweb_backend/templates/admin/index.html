@@ -1,0 +1,46 @@
+{% extends  'admin/master.html' %}
+{% block head_css %}
+{{ super() }}
+    <style>
+        html, body {
+            background-color: #deffb0;
+            width: 90%;
+            margin: auto;
+            text-align: center;
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .content {
+            font-size: large;
+            padding-top: 10rem;
+        }
+
+        .content {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        img {
+            width: 20em;
+            height: auto;
+            align-self: center;
+            margin: 3rem 5rem 5rem 10rem;
+        }
+
+        .login {
+            margin: 1rem 1rem 1rem 10rem;
+            font-size: larger;
+            font-weight: bolder;
+            color: #003221;
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Stark wie ein Baum! (Admin Backend) </h1>
+        <div class="content">
+            <img src="/static/logo.png" alt="logo">
+            <a class="login" href="https://admin.stark-wie-ein-baum.de/app/admin/logout">Logout</a>
+        </div>
+{% endblock %}
