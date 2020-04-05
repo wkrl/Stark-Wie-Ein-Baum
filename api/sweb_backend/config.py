@@ -38,7 +38,14 @@ class Config:
 	app.config['SQLALCHEMY_ECHO'] = True  # debugging purpose
 	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + DATABASE['USER'] + ':' + DATABASE['PASSWORD'] + '@' \
 	                                        + DATABASE['HOST'] + '/' + DATABASE['DBNAME']
-	
+
+	IMAGE_BASE_URL = os.environ['IMAGE_BASE_URL']
+
+	app.logger.info('DATABASE' + str(DATABASE))
+	app.logger.info('LOGIN' + str(LOGIN))
+	app.logger.info('DATABASE' + str(SMTP))
+	app.logger.info('LOGIN' + str(SECRETS))
+
 
 class Production(Config):
 	DATABASE = {
@@ -53,3 +60,4 @@ class Production(Config):
 	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # disable signal to application when a change is made in database
 	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://' + DATABASE['USER'] + ':' + DATABASE['PASSWORD'] + '@' \
 	                                        + DATABASE['HOST'] + ':' + DATABASE['PORT'] + '/' + DATABASE['DBNAME']
+	app.logger.info('DATABASE' + str(DATABASE))
