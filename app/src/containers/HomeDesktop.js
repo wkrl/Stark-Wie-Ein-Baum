@@ -126,7 +126,7 @@ const HomeDesktop = () => {
                         <Card className={classes.card}>                            
                             <div style={{display: 'grid', gridTemplateRows: '3fr 2fr', height: '100%', textAlign: 'center'}}>
                                 <div className={classes.logoContainer}>
-                                    <Link href="https://www.hof-grueneberg.de/">
+                                    <Link href="https://www.hof-grueneberg.de/stiftung/stiftung-hof-grueneberg/">
                                         <img className={classes.sectionLogo} src={LogoStiftung} alt="Stiftung Logo"></img>                    
                                     </Link>
                                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
@@ -134,7 +134,9 @@ const HomeDesktop = () => {
                                     </Link>
                                 </div>
                                 <div style={{display: 'grid'}}>
-                                    <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
+                                    <Link href="https://www.stark-wie-ein-Baum.de">
+                                        <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
+                                    </Link>
                                 </div>
                             </div>                                   
                         </Card>            
