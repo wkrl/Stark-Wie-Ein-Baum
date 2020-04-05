@@ -28,5 +28,5 @@ jobs:
       uses: azure/setup-kubectl@v1
       with:
         version: 'latest' 
-    - name: Restart docs pod
-      run: kubectl -n datexis delete pod -l app=docs
+    - name: Restart sweb-backend pod
+      run: kubectl -n sachs delete pod -l app=sweb-backend
