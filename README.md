@@ -5,8 +5,7 @@
 
 http://app.stark-wie-ein-baum.de/
 
-### Demo
-#### Backend:
+### Backend:
 #### Starting in production mode
 ```
 cd api
@@ -15,37 +14,33 @@ sudo docker-compose up
 ```
 
 #### Starting in dev mode
+you need a .env in api/
+
 ```
 cd api
-export FLASK_ENV=dev
+python3 -m virtualenv venv
 source venv/bin/activate
 source .env
+export FLASK_ENV=dev
 flask run
 ```
 The flask-server runs on http://127.0.0.1:5000
 
-#### Frontend
+#### Building a docker image
+you need a .env in api/sweb-backend/
+
+```
+cd api/sweb_backend/
+docker build -t <registry>/<namespace>/sweb_backend:<tag> -f ../Dockerfile .
+docker push <registry>/<namespace>/sweb_backend:<tag> 
+```
+
+### Frontend
 ```
 cd app
 npm install
 npm start
 ```
 Frontend runs on https://127.0.0.1:3000
-
-### (TODO) API Documentation
-https://swebapi.demo.datexis.com/api
-
-                 /api/karte
-                    
-                 /api/karte/baeume
-                    
-                 /api/karte/baeume/id
-                    
-                 /api/karte/baeume/id/koordinaten
-                 
-                 /api/karte/baeume/properties
-
-### HOW TO
-mysql -u kat -p -P 3308 -h 127.0.0.1 restfulFlask < mysql_init.sql 
 
                 
