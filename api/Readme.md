@@ -10,7 +10,6 @@ docker push <registry>/<namespace>/sweb-backend:<tag>
 ```
 
 ## docker-compose (prod-mode)
-cd sweb_backend/
 
 ```
 cd $PATH/api/
