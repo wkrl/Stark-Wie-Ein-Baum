@@ -5,8 +5,8 @@
     <div class="content">
       <h2>Stark wie ein Baum</h2>
       <h3>Admin Backend</h3>
-      <a href="/app/admin/login">Mit Google anmelden</a>
-      <a href="https://app.stark-wie-ein-baum.de/">Zurück zur App</a>
+      <a class="button" href="/app/admin/login">Mit Google anmelden</a>
+      <a class="link" href="https://app.stark-wie-ein-baum.de/">Zurück zur App</a>
     </div>
   </div>
 </body>
@@ -36,58 +36,68 @@ body {
     margin: auto;
 }
 
-.content { 
-    display: block;
-    background-color: white;
-    margin: 1.2em; 
-    padding: .6em 4em 1.6em 4em;
-    border-radius: 4px; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .content {
+  display: block;
+  background-color: white;
+  margin: 1.2em;
+  padding: .6em 4em 1.6em 4em;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h2, h3 {
-    font-weight: 400;  
-    margin: 0;
+  font-weight: 400;
+  margin: 0;
 }
 
 h2 {
-    margin: .6em 0 .2em 0;
+  margin: .6em 0 .2em 0;
 }
 
 h3 {
-    margin: 0 0 1.2em 0;
-    color: #424242;
+  margin: 0 0 1.2em 0;
+  color: #424242;
 }
 
-a {
-    display: inline-block;
-    color: white; 
-    background-color: #EC6C3F;
-    text-decoration: none;  
-    padding: .6em; 
-    border-radius: 4px; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+.button {
+  display: inline-block;
+  color: white;
+  background-color: #EC6C3F;
+  text-decoration: none;
+  padding: .6em;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-a:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.40);
+.button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.40);
+}
+
+.link {
+  color: #424242;
+  font-size: .8em;
+  text-decoration: none;
+  display: block;
+  margin: .4em 0 0 0;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 img {
-    width: 6em;
-    height: auto;
-    animation: jump 1.4s infinite;
-    animation-delay: .4s;
+  width: 6em;
+  height: auto;
+  animation: jump 1.4s infinite;
+  animation-delay: .4s;
 }
 
 @keyframes jump {
-    0%   { transform: scale(1,1)    translateY(0); }
-    10%  { transform: scale(1.1,.9) translateY(0); }
-    30%  { transform: scale(.9,1.1) translateY(-100px); }
-    50%  { transform: scale(1,1)    translateY(0); }
-    57%  { transform: scale(1,1)    translateY(-7px); }
-    64%  { transform: scale(1,1)    translateY(0); }
-    100% { transform: scale(1,1)    translateY(0); }
+  0%   { transform: scale(1,1)    translateY(0); }
+        10%  { transform: scale(1.1,.9) translateY(0); }
+        30%  { transform: scale(.9,1.1) translateY(-100px); }
+        50%  { transform: scale(1,1)    translateY(0); }
+        57%  { transform: scale(1,1)    translateY(-7px); }
+        64%  { transform: scale(1,1)    translateY(0); }
+        100% { transform: scale(1,1)    translateY(0); }
 }
-</style>
-
