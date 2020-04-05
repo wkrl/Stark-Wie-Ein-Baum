@@ -10,7 +10,7 @@ from flask_limiter import Limiter
 
 DB = SQLAlchemy()
 MA = Marshmallow()
-admin = Admin(template_mode='bootstrap3')
+AD = Admin(template_mode='bootstrap3')
 login_manager = LoginManager()
 logging.basicConfig(level=logging.DEBUG)
 
@@ -18,7 +18,7 @@ def create_app():
 	app = Flask(__name__)
 	DB.init_app(app)
 	MA.init_app(app)
-	admin.init_app(app)
+	AD.init_app(app)
 	login_manager.init_app(app)
 	return app
 
@@ -30,17 +30,21 @@ def set_environment():
 	else:
 		app.config.from_object('sweb_backend.config.Production')
 		app.logger.info(app.config['SQLALCHEMY_DATABASE_URI'])
+	from sweb_backend.config import Config
+	app.secret_key = Config.SECRETS['SECRET_KEY']
 
 
 def create_tables():
-	with app.app_context():
-		from sweb_backend import models
-		from sweb_backend.admin import pflanzlistetable, obstsortentable, imagetable
-		admin.add_view(imagetable(models.Image, DB.session))
-		admin.add_view(pflanzlistetable(models.Pflanzliste, DB.session))
-		admin.add_view(obstsortentable(models.Sorten, DB.session))
+	app.app_context().push()
+	from sweb_backend import models
+	from sweb_backend.admin_views import pflanzlistetable, obstsortentable, imagetable
+	AD.add_view(imagetable(models.Image, DB.session))
+	AD.add_view(pflanzlistetable(models.Pflanzliste, DB.session))
+	AD.add_view(obstsortentable(models.Sorten, DB.session))
+
 
 def register_all_blueprints():
+	app.app_context().push()
 	from sweb_backend.login import admin_login
 	from sweb_backend.api import api
 	app.register_blueprint(admin_login)

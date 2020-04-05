@@ -8,9 +8,9 @@ Base.prepare(DB.engine, reflect=True)
 
 from sweb_backend.main import app
 
-with app.app_context():
-	engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], pool_pre_ping=True, pool_size=5)
-	engine.connect()
+app.app_context().push()
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], pool_pre_ping=True, pool_size=5)
+engine.connect()
 
 
 class Pflanzliste(DB.Model):
@@ -48,7 +48,7 @@ class Sorten(DB.Model):
 	verbreitung = DB.Column(DB.String)
 
 
-class Admin(DB.Model, UserMixin):
+class Admins(DB.Model, UserMixin):
 	__tablename__ = 'admins'
 	id = DB.Column(DB.String, primary_key=False)
 	email = DB.Column(DB.String, primary_key=True)
@@ -64,17 +64,20 @@ class Image(DB.Model):
 
 def is_active(self):
 	"""True, as all users are active."""
+	app.logger.info('IS ACTIVE ' + str(self.active))
 	if self.active == "true":
 		return True
 
 
 def get_id(self):
 	"""Return the email address to satisfy Flask-Login's requirements."""
+	app.logger.info('GET ID ' + str(self.email))
 	return self.email
 
 
 def is_authenticated(self):
 	"""Return True if the user is authenticated."""
+	app.logger.info('IS AUTHENTICATED' + str(self.authenticated))
 	if self.authenticated == "true":
 		return True
 

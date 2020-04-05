@@ -22,18 +22,18 @@ def get_google_provider_cfg():
 @login_manager.user_loader
 def load_user(user_id):
 	global USERS_EMAIL
-	from sweb_backend.models import Admin
+	from sweb_backend.models import Admins
 	from sweb_backend.main import DB, app
 	app.logger.info('LOAD USER, SHOW EMAIL: ' + str(user_id))
-	user = DB.session.query(Admin).get(USERS_EMAIL)
+	user = DB.session.query(Admins).get(USERS_EMAIL)
 	return user
 
 
 def flask_user_authentication(users_email):
-	from sweb_backend.models import Admin
+	from sweb_backend.models import Admins
 	from sweb_backend.main import DB, app
 	if users_email == Config.LOGIN['ADMIN_EMAIL_1'] or users_email == Config.LOGIN['ADMIN_EMAIL_2']:
-		admin = DB.session.query(Admin).get(users_email)
+		admin = DB.session.query(Admins).get(users_email)
 		admin.authenticated = 'true'
 		admin.active = 'true'
 		DB.session.add(admin)
@@ -60,8 +60,7 @@ def admin_home():
 		app.logger.info('current user: ' + str(current_user))
 		return redirect('https://' + ADMIN_BASE_URL + 'admin')
 	else:
-		#return '<a class="button" href="/app/admin/login">Google Login</a>'
-		return render_template('admin/login.html')
+		return render_template('login.html')
 
 
 @admin_login.route('/app/admin/login')
