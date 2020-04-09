@@ -13,7 +13,7 @@ engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], pool_pre_ping=True
 engine.connect()
 
 
-class Pflanzliste(DB.Model):
+class Plantlist(DB.Model):
 	__tablename__ = 'pflanzliste'
 	BaumNr = DB.Column(DB.Integer, primary_key=True)
 	Pflanzreihe = DB.Column(DB.Integer)
@@ -31,7 +31,7 @@ class Pflanzliste(DB.Model):
 	Latitude = DB.Column(DB.Float)
 
 
-class Sorten(DB.Model):
+class Sorts(DB.Model):
 	__tablename__ = 'obstsorten'
 	id = DB.Column(DB.Integer, primary_key=True)
 	fruchtID = DB.Column(DB.Integer)
