@@ -22,16 +22,12 @@ def create_app():
 	login_manager.init_app(app)
 	return app
 
-
 def set_environment():
+	app.config['FLASK_ADMIN_SWATCH'] = 'spacelab'
 	if os.environ['FLASK_ENV'] == 'dev':
 		app.config.from_object('sweb_backend.config.Config')
-		app.logger.info(app.config['SQLALCHEMY_DATABASE_URI'])
 	else:
 		app.config.from_object('sweb_backend.config.Production')
-		app.logger.info(app.config['SQLALCHEMY_DATABASE_URI'])
-	from sweb_backend.config import Config
-	app.secret_key = Config.SECRETS['SECRET_KEY']
 
 
 def create_tables():
@@ -39,8 +35,8 @@ def create_tables():
 	from sweb_backend import models
 	from sweb_backend.admin_views import pflanzlistetable, obstsortentable, imagetable
 	AD.add_view(imagetable(models.Image, DB.session))
-	AD.add_view(pflanzlistetable(models.Pflanzliste, DB.session))
-	AD.add_view(obstsortentable(models.Sorten, DB.session))
+	AD.add_view(pflanzlistetable(models.Plantlist, DB.session))
+	AD.add_view(obstsortentable(models.Sorts, DB.session))
 
 
 def register_all_blueprints():
@@ -57,6 +53,8 @@ limiter = Limiter(
 	key_func=get_remote_address,
 	default_limits=['200 per day']
 )
+
 set_environment()
 create_tables()
 register_all_blueprints()
+
