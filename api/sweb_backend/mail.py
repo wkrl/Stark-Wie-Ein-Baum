@@ -12,7 +12,7 @@ PASSWORD = app.config['SMTP_PASSWORD']
 
 
 def _plain_text_mail(data):
-	return 'Absender:\n' + data['firstname'] + ' ' + data['lastname'] + '\n' \
+	return 'Absender:\n' + data['firstName'] + ' ' + data['lastName'] + '\n' \
 		+ data['streetAddress'] + '\n' + data['cityAddress'] + '\n' + data['email'] + '\n' \
 		+ 'Tel: ' + data['phone'] + '\n\n' + 'Nachricht:\n' + data['message']
 
