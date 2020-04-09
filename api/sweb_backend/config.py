@@ -9,7 +9,7 @@ class Config:
 	# SECRETS
 	GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
 	GOOGLE_CLIENT_SECRET = os.environ['GOOGLE_CLIENT_SECRET']
-	SESSION_SECRET_KEY = os.environ['SECRET_KEY']
+	SECRET_KEY = os.environ['SECRET_KEY']
 
 	# LOGIN
 	ADMIN_EMAIL_1 = os.environ['ADMIN_EMAIL_1']
