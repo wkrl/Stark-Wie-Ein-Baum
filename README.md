@@ -1,5 +1,9 @@
 # Stark-Wie-Ein-Baum
 
+<p align="right">
+  <img width="auto" height="300" src="./app/src/images/logo.png">
+</p>
+
 ### About
 ["Stark wie ein Baum!“](https://www.hof-grueneberg.de/Stiftung/Stiftung-hof-grueneberg/#c1669) ist ein Gemeinschaftsprojekt des Caritas-Kinderhospizdienstes und der [Stiftung Hof Grüneberg](https://www.hof-grueneberg.de/stiftung/stiftung-hof-grueneberg/).
 
