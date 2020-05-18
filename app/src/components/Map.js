@@ -16,6 +16,7 @@ const Map = (props) => {
     let features = [];
 
     const [error, setError] = React.useState(false);
+    const [clickInfo, setClickInfo] = React.useState(true);
     const [state, setState] = useState({
         "open": false, 
         "hasSponse": null, 
@@ -30,6 +31,7 @@ const Map = (props) => {
           return;
         }
         setError(false);
+        setClickInfo(false);
     };
 
     const addResponseToFeatures = (data) => {
@@ -85,8 +87,9 @@ const Map = (props) => {
         .then(response => {
             addResponseToFeatures(response.data);
             map.data.addGeoJson({"type": "FeatureCollection", "features": features});            
-            changeGeoJsonIcons();        
-        })      
+            changeGeoJsonIcons();
+            setClickInfo(true);
+        })        
         .catch((e) => {
             setError(true);
         });
@@ -157,6 +160,18 @@ const Map = (props) => {
 
     return <React.Fragment>
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: '1', height: '100vh' }} id="map" />
+        {!state.open && 
+        <Snackbar open={clickInfo} autoHideDuration={6000} onClose={handleClose}>
+            <SnackbarContent
+                style={{
+                    backgroundColor: 'rgb(252, 217, 51)',
+                    color: 'black',
+                }}
+                message={                          
+                    "Klicke auf Bäume, um mehr Infos zu sehen."
+                }
+            />
+        </Snackbar>}
         <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
                 style={{
@@ -166,7 +181,7 @@ const Map = (props) => {
                     "Bäume konnten nicht geladen werden!"
                 }
             />
-        </Snackbar>        
+        </Snackbar>
         {state.open && 
             <TreeInfoBox parentCallback={(childData) => setState({ "open": childData})} 
                 key={new Date()} 
