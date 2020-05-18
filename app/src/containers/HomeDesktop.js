@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button, Link, Card, CardActions, useMediaQuery, useTheme } from '@material-ui/core';
+import { Typography, Grid, Button, Link, Card, useMediaQuery, useTheme } from '@material-ui/core';
 import backgroundImage from '../images/home/desktop/background.jpg'; 
 import Spende from '../images/home/desktop/spende.png'; 
 import Logo from '../images/logo.png'; 
@@ -87,14 +87,14 @@ const HomeDesktop = () => {
     return <React.Fragment>     
         <Grid container alignContent="center" className={classes.header}>
             <Grid item xs={12}>
-                <img src={Logo} className={classes.logo} />
+                <img src={Logo} className={classes.logo} alt="Stark-Wie-Ein-Baum Logo" />
                 <Typography variant="h6">
                     Als Baumpate doppelt Gutes tun!
                 </Typography>
                 <Typography variant="body1" color="secondary" className={classes.subheading}>
                     Helfen Sie Familien mit einem schwer erkrankten Kind oder Jugendlichen. Unterstützen Sie gleichzeitig ein wichtiges Naturschutzprojekt.
                 </Typography>                
-                <Button variant="contained" size="small" style={{zIndex: '0.3'}} component={NavLink} to={() => "/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>                        
+                <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', zIndex: '0.3'}}>Pate werden</Button>                        
             </Grid>
         </Grid>    
         <Grid container justify="space-evenly" className={classes.cardContainer}>

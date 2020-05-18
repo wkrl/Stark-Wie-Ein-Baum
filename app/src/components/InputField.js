@@ -28,7 +28,7 @@ const InputField = (props) => {
 
     const getInputType = () => {
         if (props.hidden) return "password";
-        if (props.name == "email") return "email"; 
+        if (props.name === "email") return "email"; 
         return "text"; 
     }
 
