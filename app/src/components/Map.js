@@ -164,8 +164,7 @@ const Map = (props) => {
         <Snackbar open={clickInfo} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
                 style={{
-                    backgroundColor: 'rgb(252, 217, 51)',
-                    color: 'black',
+                    backgroundColor: 'rgb(236, 108, 63)',                    
                 }}
                 message={                          
                     "Klicke auf Bäume, um mehr Infos zu sehen."
