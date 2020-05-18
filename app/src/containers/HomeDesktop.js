@@ -7,6 +7,7 @@ import Spende from '../images/home/desktop/spende.png';
 import Logo from '../images/logo.png'; 
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
+import LogoBeuth from '../images/logo_beuth_desktop.png'; 
 
 import SectionBackground from '../images/home/mobile/section_background.png'; 
 
@@ -177,7 +178,7 @@ const HomeDesktop = () => {
                                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
                                         <img className={classes.sectionLogo} src={LogoCaritas} alt="Caritas Logo"></img>
                                     </Link>
-                                </Grid>                      
+                                </Grid>                                        
                                 <Grid item xs={12} style={{textAlign: 'center', padding: '3px 0 15px 0'}}>
                                     <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
                                         <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Mehr Infos</Button>
@@ -189,10 +190,17 @@ const HomeDesktop = () => {
                 </React.Fragment>}                                        
             </Grid>                              
         </Grid>         
-        <div className={classes.footer}>
+        <div className={classes.footer}>            
             <Typography variant="caption" color="secondary">
                 <span><Link href="https://www.hof-grueneberg.de/kontakt/kontaktformular/#c1613">Impressum</Link> | <Link href="http://admin.stark-wie-ein-baum.de/">Admin</Link></span>
             </Typography>
+            <Grid container>
+                <Grid item xs={12}>
+                    <Link href="https://www.beuth-hochschule.de/" underline="none">
+                        <img style={{width: '260px', padding: '10px'}} src={LogoBeuth} alt="Beuth Hochschule für Technik Logo" />
+                    </Link>
+                </Grid>
+            </Grid>         
         </div>
     </React.Fragment>
 }
