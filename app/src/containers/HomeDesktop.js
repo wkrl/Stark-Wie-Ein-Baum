@@ -87,7 +87,7 @@ const HomeDesktop = () => {
     return <React.Fragment>     
         <Grid container alignContent="center" className={classes.header}>
             <Grid item xs={12}>
-                <img src={Logo} className={classes.logo} />
+                <img src={Logo} className={classes.logo} alt="Stark-Wie-Ein-Baum Logo" />
                 <Typography variant="h6">
                     Als Baumpate doppelt Gutes tun!
                 </Typography>
