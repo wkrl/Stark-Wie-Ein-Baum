@@ -64,7 +64,10 @@ const useStyles = makeStyles(theme => ({
     buttonContainer: {
         display: 'grid',                              
         backgroundImage: `url(${SectionBackground})`,              
-    },     
+    },
+    mehrInfoButton: {
+        
+    },  
     logoContainer: {
         placeSelf: 'center', 
         width: '100%',         
@@ -135,7 +138,7 @@ const HomeDesktop = () => {
                                     </Link>
                                 </div>
                                 <div style={{display: 'grid'}}>
-                                    <Link href="https://www.stark-wie-ein-Baum.de">
+                                    <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
                                         <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
                                     </Link>
                                 </div>
@@ -181,7 +184,7 @@ const HomeDesktop = () => {
                                 </Grid>                                        
                                 <Grid item xs={12} style={{textAlign: 'center', padding: '3px 0 15px 0'}}>
                                     <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
-                                        <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Mehr Infos</Button>
+                                        <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', textDecoration: 'none'}}>Mehr Infos</Button>
                                     </Link>
                                 </Grid>
                             </Grid>                        
