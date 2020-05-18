@@ -35,7 +35,7 @@ const Map = (props) => {
     };
 
     const addResponseToFeatures = (data) => {
-        data.map(tree => { 
+        data.forEach(tree => { 
             let feature = {                
                 "geometry": {
                     "coordinates": [tree.Latitude, tree.Longitude],
