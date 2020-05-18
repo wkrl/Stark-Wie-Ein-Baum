@@ -8,6 +8,7 @@ import Spende from '../images/home/mobile/spende.png';
 import Logo from '../images/logo.png'; 
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
+import LogoBeuth from '../images/logo_beuth.png';
 
 const useStyles = makeStyles(theme => ({  
     textSection: {
@@ -33,8 +34,9 @@ const useStyles = makeStyles(theme => ({
     logo: {
         width: '100%',
         maxWidth: '160px', 
-        height: 'auto',        
+        height: 'auto',
         objectFit: 'contain', 
+        padding: '12px 0',
     },   
     footer: {
         padding: '5px 0 5px 0',
@@ -91,14 +93,19 @@ const HomeMobile = () => {
                 </Grid>
             </Grid>  
             <Grid container className={classes.logoSection}>                    
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <Link href="https://www.hof-grueneberg.de/">
                         <img className={classes.logo} src={LogoStiftung} alt="Stiftung Logo" />                  
                     </Link>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
                         <img className={classes.logo} src={LogoCaritas} alt="Caritas Logo" />
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
+                    <Link href="">
+                        <img className={classes.logo} src={LogoBeuth} alt="Beuth-Hochschule für Technik Logo" />
                     </Link>
                 </Grid>
             </Grid>  
