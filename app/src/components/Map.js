@@ -131,7 +131,7 @@ const Map = (props) => {
             // Close info box when clicking on map
             setState({
                 "open": false, 
-                "hasSponse": null, 
+                "hasSponsor": null, 
                 "treeId": null,
                 "sortenId": null,
                 "reihe": null, 
