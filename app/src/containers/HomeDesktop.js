@@ -94,7 +94,7 @@ const HomeDesktop = () => {
                 <Typography variant="body1" color="secondary" className={classes.subheading}>
                     Helfen Sie Familien mit einem schwer erkrankten Kind oder Jugendlichen. Unterstützen Sie gleichzeitig ein wichtiges Naturschutzprojekt.
                 </Typography>                
-                <Button variant="contained" size="small" style={{zIndex: '0.3'}} component={NavLink} to={() => "/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>                        
+                <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', zIndex: '0.3'}}>Pate werden</Button>                        
             </Grid>
         </Grid>    
         <Grid container justify="space-evenly" className={classes.cardContainer}>
