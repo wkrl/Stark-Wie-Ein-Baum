@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button, Link, Card, CardActions, useMediaQuery, useTheme } from '@material-ui/core';
+import { Typography, Grid, Button, Link, Card, useMediaQuery, useTheme } from '@material-ui/core';
 import backgroundImage from '../images/home/desktop/background.jpg'; 
 import Spende from '../images/home/desktop/spende.png'; 
 import Logo from '../images/logo.png'; 
