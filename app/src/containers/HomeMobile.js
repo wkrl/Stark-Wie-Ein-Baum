@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         objectFit: 'contain', 
     },
     logoSection: {
-        padding: '15px',  
+        padding: '26px 15px 15px 15px',  
         textAlign: 'center', 
         background: theme.background, 
     },
@@ -100,12 +100,12 @@ const HomeMobile = () => {
                 </Grid>
             </Grid>  
             <Grid container className={classes.logoSection}>                    
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <Link href="https://www.hof-grueneberg.de/">
                         <img className={classes.logo} src={LogoStiftung} alt="Stiftung Logo" />                  
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
                         <img className={classes.logo} src={LogoCaritas} alt="Caritas Logo" />
                     </Link>
