@@ -205,11 +205,6 @@ const HomeDesktop = () => {
                 <span><Link href="https://www.hof-grueneberg.de/kontakt/kontaktformular/#c1613">Impressum</Link> | <Link href="http://admin.stark-wie-ein-baum.de/">Admin</Link></span>
             </Typography>
             <Grid container>
-                <Grid item xs={12}>
-                    <Link href="https://www.beuth-hochschule.de/" underline="none">
-                        <img style={{width: '260px', padding: '10px'}} src={LogoBeuth} alt="Beuth Hochschule für Technik Logo" />
-                    </Link>
-                </Grid>
                 <Grid item xs={12} style={{padding:'1vh 36vw'}}>
                     <Typography variant="caption" color="secondary">
                         Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.beuth-hochschule.de/">Beuth Hochschule für Technik Berlin</Link>.
