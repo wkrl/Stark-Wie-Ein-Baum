@@ -78,8 +78,9 @@ const useStyles = makeStyles(theme => ({
     }, 
     footer: {
         textAlign: 'center', 
+        padding: '1vh 0 0 0',
         background: theme.background, 
-        padding: '0 0 6px 0',                 
+        backgroundColor: 'rgb(159, 204, 160)',
     },
     linkedInLink: {
         '&:after': {
