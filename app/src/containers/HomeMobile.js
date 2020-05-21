@@ -9,6 +9,7 @@ import Logo from '../images/logo.png';
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
 import LogoBeuth from '../images/logo_beuth_mobile.png';
+import LogoLinkedIn from '../images/linked_in_logo.png'; 
 
 const useStyles = makeStyles(theme => ({  
     textSection: {
@@ -42,7 +43,13 @@ const useStyles = makeStyles(theme => ({
         padding: '5px 0 5px 0',
         textAlign: 'center', 
         background: 'rgb(139, 181, 142)', 
-    }
+    },
+    linkedInLink: {
+        '&:after': {
+            content: `url(${LogoLinkedIn})`,
+            padding: '0 0 0 2px',  
+        }        
+    }    
 })); 
 
 const HomeMobile = () => {
@@ -113,6 +120,11 @@ const HomeMobile = () => {
                 <Grid item xs={12}>
                     <Typography variant="caption" color="secondary">
                         <span><Link href="https://www.hof-grueneberg.de/kontakt/kontaktformular/#c1613">Impressum</Link> | <Link href="http://admin.stark-wie-ein-baum.de/">Admin</Link></span>
+                    </Typography>                                        
+                </Grid>
+                <Grid item xs={12} style={{padding:'2% 16%'}}>
+                    <Typography variant="caption" color="secondary">
+                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link>.
                     </Typography>
                 </Grid>
             </Grid>
