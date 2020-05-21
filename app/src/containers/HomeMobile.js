@@ -103,8 +103,8 @@ const HomeMobile = () => {
                         <img className={classes.logo} src={LogoCaritas} alt="Caritas Logo" />
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
-                    <Link href="">
+                <Grid item xs={12}>          
+                    <Link href="https://www.beuth-hochschule.de/">
                         <img className={classes.logo} src={LogoBeuth} alt="Beuth-Hochschule für Technik Logo" />
                     </Link>
                 </Grid>
