@@ -7,7 +7,6 @@ import Spende from '../images/home/desktop/spende.png';
 import Logo from '../images/logo.png'; 
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
-import LogoBeuth from '../images/logo_beuth_desktop.png'; 
 import LogoLinkedIn from '../images/linked_in_logo.png'; 
 
 import SectionBackground from '../images/home/mobile/section_background.png'; 
