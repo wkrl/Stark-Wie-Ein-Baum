@@ -109,12 +109,7 @@ const HomeMobile = () => {
                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
                         <img className={classes.logo} src={LogoCaritas} alt="Caritas Logo" />
                     </Link>
-                </Grid>
-                <Grid item xs={12}>          
-                    <Link href="https://www.beuth-hochschule.de/">
-                        <img className={classes.logo} src={LogoBeuth} alt="Beuth-Hochschule für Technik Logo" />
-                    </Link>
-                </Grid>
+                </Grid>               
             </Grid>  
             <Grid container className={classes.footer}>
                 <Grid item xs={12}>
@@ -124,7 +119,7 @@ const HomeMobile = () => {
                 </Grid>
                 <Grid item xs={12} style={{padding:'2% 16%'}}>
                     <Typography variant="caption" color="secondary">
-                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link>.
+                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.beuth-hochschule.de/">Beuth Hochschule für Technik Berlin</Link>.
                     </Typography>
                 </Grid>
             </Grid>
