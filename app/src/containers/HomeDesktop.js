@@ -8,6 +8,7 @@ import Logo from '../images/logo.png';
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
 import LogoBeuth from '../images/logo_beuth_desktop.png'; 
+import LogoLinkedIn from '../images/linked_in_logo.png'; 
 
 import SectionBackground from '../images/home/mobile/section_background.png'; 
 
@@ -77,9 +78,16 @@ const useStyles = makeStyles(theme => ({
     }, 
     footer: {
         textAlign: 'center', 
+        padding: '1vh 0 0 0',
         background: theme.background, 
-        padding: '0 0 6px 0',                 
+        backgroundColor: 'rgb(159, 204, 160)',
     },
+    linkedInLink: {
+        '&:after': {
+            content: `url(${LogoLinkedIn})`,
+            padding: '0 0 0 2px',  
+        }        
+    }
 })); 
 
 const HomeDesktop = () => {
@@ -198,10 +206,10 @@ const HomeDesktop = () => {
                 <span><Link href="https://www.hof-grueneberg.de/kontakt/kontaktformular/#c1613">Impressum</Link> | <Link href="http://admin.stark-wie-ein-baum.de/">Admin</Link></span>
             </Typography>
             <Grid container>
-                <Grid item xs={12}>
-                    <Link href="https://www.beuth-hochschule.de/" underline="none">
-                        <img style={{width: '260px', padding: '10px'}} src={LogoBeuth} alt="Beuth Hochschule für Technik Logo" />
-                    </Link>
+                <Grid item xs={12} style={{padding:'1vh 36vw'}}>
+                    <Typography variant="caption" color="secondary">
+                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.beuth-hochschule.de/">Beuth Hochschule für Technik Berlin</Link>.
+                    </Typography>
                 </Grid>
             </Grid>         
         </div>

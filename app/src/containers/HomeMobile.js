@@ -9,6 +9,7 @@ import Logo from '../images/logo.png';
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
 import LogoBeuth from '../images/logo_beuth_mobile.png';
+import LogoLinkedIn from '../images/linked_in_logo.png'; 
 
 const useStyles = makeStyles(theme => ({  
     textSection: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
         objectFit: 'contain', 
     },
     logoSection: {
-        padding: '15px',  
+        padding: '26px 15px 15px 15px',  
         textAlign: 'center', 
         background: theme.background, 
     },
@@ -39,10 +40,16 @@ const useStyles = makeStyles(theme => ({
         padding: '12px 0',
     },   
     footer: {
-        padding: '5px 0 5px 0',
+        padding: '15px 0 5px 0',
         textAlign: 'center', 
-        background: 'rgb(139, 181, 142)', 
-    }
+        background: 'rgb(159, 204, 160)', 
+    },
+    linkedInLink: {
+        '&:after': {
+            content: `url(${LogoLinkedIn})`,
+            padding: '0 0 0 2px',  
+        }        
+    }    
 })); 
 
 const HomeMobile = () => {
@@ -93,26 +100,26 @@ const HomeMobile = () => {
                 </Grid>
             </Grid>  
             <Grid container className={classes.logoSection}>                    
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <Link href="https://www.hof-grueneberg.de/">
                         <img className={classes.logo} src={LogoStiftung} alt="Stiftung Logo" />                  
                     </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
                         <img className={classes.logo} src={LogoCaritas} alt="Caritas Logo" />
                     </Link>
-                </Grid>
-                <Grid item xs={12}>
-                    <Link href="">
-                        <img className={classes.logo} src={LogoBeuth} alt="Beuth-Hochschule für Technik Logo" />
-                    </Link>
-                </Grid>
+                </Grid>               
             </Grid>  
             <Grid container className={classes.footer}>
                 <Grid item xs={12}>
                     <Typography variant="caption" color="secondary">
                         <span><Link href="https://www.hof-grueneberg.de/kontakt/kontaktformular/#c1613">Impressum</Link> | <Link href="http://admin.stark-wie-ein-baum.de/">Admin</Link></span>
+                    </Typography>                                        
+                </Grid>
+                <Grid item xs={12} style={{padding:'4% 16% 2% 16%'}}>
+                    <Typography variant="caption" color="secondary">
+                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.beuth-hochschule.de/">Beuth Hochschule für Technik Berlin</Link>.
                     </Typography>
                 </Grid>
             </Grid>
