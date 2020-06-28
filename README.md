@@ -45,14 +45,5 @@ npm start
 ```
 Frontend runs on https://127.0.0.1:3000
 
-### current domains
-
-swebapi.demo.datexis.com (api baseurl used by frontend)
-swebapi.dev.demo.datexis.com (development: test and approve new changes)
-swebapi.monitoring.demo.datexis.com (monitoring app that sends an email if /api/karte does not return <200>)
-
-admin.stark-wie-ein-baum.de (accessing the admin portal)
-app.stark-wie-ein-baum.de (accessing sweb frontend)
-
 
                 
