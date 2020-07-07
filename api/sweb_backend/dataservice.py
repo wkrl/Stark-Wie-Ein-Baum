@@ -1,7 +1,7 @@
 import requests
 import re
-from sweb_backend.main import app
-
+from .main import app
+from .config import Config
 
 def extract_values_from_json(response):
 	email = str(response['email'])
@@ -18,13 +18,19 @@ def extract_values_from_json(response):
 
 def get_valid_image_uri(image_output):
 	checked_files = []
-	base_download_url = app.config['IMAGE_BASE_URL']
-	for image in image_output:
-		regex = 'lnk/[\w]*'
-		image_id = re.search(regex, image['uri']).group().split('lnk/')[1]
-		response = requests.head(base_download_url + image_id)
-		if response.status_code is 200 and (
-			response.headers['Content-Type'] == 'image/png' or response.headers['Content-Type'] == 'image/jpeg'):
-			app.logger.info('get_valid_image_uri ' + str(response))
-			checked_files.append(base_download_url + image_id)
+	base_download_url = Config.IMAGE_BASE_URL
+	imagelist = eval(image_output[0])
+	for image in imagelist:
+		try:
+			regex = 'lnk/[\w]*'
+			image_id = re.search(regex, image['uri']).group().split('lnk/')[1]
+			response = requests.head(base_download_url + image_id)
+			if response.status_code is 200 and (
+				response.headers['Content-Type'] == 'image/png' or response.headers['Content-Type'] == 'image/jpeg'):
+				app.logger.info('get_valid_image_uri ' + str(response))
+				checked_files.append(base_download_url + image_id)
+			else:
+				print('image not available: {}'.format(image))
+		except TypeError as e:
+			print('TypeError: {}'.format(e))
 	return checked_files

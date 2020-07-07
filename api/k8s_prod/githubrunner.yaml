@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sweb-github-runner
+  labels:
+    app: sweb-github-runner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sweb-github-runner
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sweb-github-runner
+    spec:
+      initContainers:
+        - name: volume-mount-hack
+          image: busybox
+          command: ["sh", "-c", "chmod -R 777 /tmp/sweb-github-runner"]
+          volumeMounts:
+          - name: work
+            mountPath: "/tmp/sweb-github-runner"
+      containers:
+      - name: github-runner
+        image: tcardonne/github-runner
+        securityContext:
+          privileged: true
+        env:
+        - name: RUNNER_NAME
+          value: "sweb-github-runner"
+        - name: RUNNER_TOKEN
+          value: "AJTV3BL53HI64NLUZZNEEMC6RJHCW"
+        - name: RUNNER_REPOSITORY_URL
+          value: "https://github.com/wkrl/Stark-Wie-Ein-Baum"
+        - name: RUNNER_WORK_DIRECTORY
+          value: "/tmp/sweb-github-runner"
+        volumeMounts:
+        - name: work
+          mountPath: "/tmp/sweb-github-runner"
+        - name: dockersock
+          mountPath: "/var/run/docker.sock"
+      volumes:
+      - name: work
+        hostPath:
+          path: "/tmp/sweb-github-runner"
+      - name: dockersock
+        hostPath:
+          path: "/var/run/docker.sock"

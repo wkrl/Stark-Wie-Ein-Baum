@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sweb-backend
-          image: registry.datexis.com/ksachs/sweb-backend:v199
+          image: registry.datexis.com/ksachs/sweb-backend:release
           ports:
             - name: client-port
               containerPort: 5000 

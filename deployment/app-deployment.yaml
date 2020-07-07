@@ -12,7 +12,7 @@ spec:
         app: sweb-frontend
     spec:
       containers:
-        - image: registry.datexis.com/ksachs/sweb-frontend:release
+        - image: registry.datexis.com/ksachs/sweb-frontend:releasev1
           name: sweb-frontend
           ports:
             - name: client-port
