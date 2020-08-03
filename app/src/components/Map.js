@@ -5,17 +5,18 @@ import quitteIcon from '../images/icons/quitte_icon.svg';
 import apfelIcon from '../images/icons/apfel_icon.svg';
 import birneIcon from '../images/icons/birne_icon.svg';
 import pflaumeIcon from '../images/icons/pflaume_icon.svg';
+import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
 
 
 const axios = require('axios');
-var map; 
+var map, marker; 
 
-const Map = (props) => {
+const Map = () => {
     let clickedIconId;
     let features = [];
 
-    const [error, setError] = React.useState(false);
+    const [error, setError] = React.useState({ message: "" });    
     const [clickInfo, setClickInfo] = React.useState(true);
     const [state, setState] = useState({
         "open": false, 
@@ -30,7 +31,7 @@ const Map = (props) => {
         if (reason === 'clickaway') {
           return;
         }
-        setError(false);
+        setError({ });
         setClickInfo(false);
     };
 
@@ -64,9 +65,9 @@ const Map = (props) => {
     }
 
     const changeGeoJsonIcons = () => {
-        map.data.setStyle(function(feature) {
+        map.data.setStyle(function(feature) {                     
             let fruitname = feature.getProperty("frucht");
-            return ({icon: { url: getIconBasedOnFruitname(fruitname) }}); 
+            return ({ icon: { url: getIconBasedOnFruitname(fruitname) } }); 
         });
     }
 
@@ -82,17 +83,42 @@ const Map = (props) => {
             }
         )
 
-        // Get map features
+        let iconImage = new window.google.maps.MarkerImage(
+            deviceIcon, 
+            new window.google.maps.Size(95, 95), // icon width and height 
+            new window.google.maps.Point(0, 0), 
+            new window.google.maps.Point(47, 47) // icon anchor
+        );
+
+        // Set map data
         axios.get("https://swebapi.demo.datexis.com/api/karte")
         .then(response => {
-            addResponseToFeatures(response.data);
-            map.data.addGeoJson({"type": "FeatureCollection", "features": features});            
+            addResponseToFeatures(response.data);             
+            if (navigator.geolocation) {                         
+                navigator.geolocation.getCurrentPosition(pos => {                    
+                    marker = new window.google.maps.Marker({
+                        position: new window.google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                        map: map,
+                        icon: iconImage,                        
+                    });
+                    marker.setMap(map);
+                    
+                    navigator.geolocation.watchPosition(pos => {                                                
+                        marker.setPosition(new window.google.maps.LatLng({lat: pos.coords.latitude, lng: pos.coords.longitude}));                        
+                    }, (e) => console.log(e), { enableHighAccuracy: true, timeout: 3000 });
+                }, function() {
+                    setError({ message: "Standort konnte nicht abgerufen werden." })                    
+                });
+            } else {                
+                setError({ message: "Standort konnte nicht abgerufen werden." })
+            }
             changeGeoJsonIcons();
+            map.data.addGeoJson({ "type": "FeatureCollection", features });
             setClickInfo(true);
         })        
         .catch((e) => {
-            setError(true);
-        });
+            setError({ message: "Bäume konnten nicht geladen werden!" });
+        });        
 
         // Display info box
         map.data.addListener('click', function(event) {
@@ -163,22 +189,14 @@ const Map = (props) => {
         {!state.open && 
         <Snackbar open={clickInfo} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
-                style={{
-                    backgroundColor: 'rgb(236, 108, 63)',                    
-                }}
-                message={                          
-                    "Klicke auf Bäume, um mehr Infos zu sehen."
-                }
+                style={{backgroundColor: 'rgb(236, 108, 63)'}}
+                message={"Klicke auf Bäume, um mehr Infos zu sehen."}
             />
         </Snackbar>}
-        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={error.message != null} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
-                style={{
-                    backgroundColor: 'rgb(211, 56, 47)',
-                }}
-                message={                          
-                    "Bäume konnten nicht geladen werden!"
-                }
+                style={{backgroundColor: 'rgb(211, 56, 47)'}}
+                message={error.message}
             />
         </Snackbar>
         {state.open && 
