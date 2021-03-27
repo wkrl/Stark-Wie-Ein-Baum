@@ -62,6 +62,9 @@ const NavBar = (props) => {
           <ListItem button key={"Zu den Bäumen"} component={NavLink} to={"/karte"}>
             <ListItemText primary={"Zu den Bäumen"} />
           </ListItem>
+          <ListItem button key={"Sortenliste"} component={NavLink} to={"/sortenliste"}>
+            <ListItemText primary={"Sortenliste"} />
+          </ListItem>
           <Link href="http://www.stark-wie-ein-baum.de/" color="inherit" underline="none">
             <ListItem button key={"Mehr Infos"}>          
                 <ListItemText primary={"Mehr Infos"} />            
