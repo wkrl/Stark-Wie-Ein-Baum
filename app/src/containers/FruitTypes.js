@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useMediaQuery } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -15,13 +16,15 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const axios = require('axios');
 
 const useStyles = makeStyles(theme => ({
-	root: {
+	desktopRoot: {
 		backgroundColor: theme.background,
 		minHeight: '100vh',
-		paddingLeft: '15px',
-		paddingRight: '15px',
-		paddingTop: '25px',
-		paddingBottom: '15px',
+		padding: '5vh 10vw 5vh 10vw',
+	},
+	mobileRoot: {
+		backgroundColor: theme.background,
+		minHeight: '100vh',
+		padding: '25px 15px 15px 15px',
 	},
 	inputContainer: {
 		display: 'block',
@@ -36,8 +39,9 @@ const useStyles = makeStyles(theme => ({
 	},		
 }));
 
-const FruitTypes = () => {
+const FruitTypes = () => {	
 	const classes = useStyles();
+	const isDesktop = useMediaQuery('(min-width:426px)'); 
 
 	const [selectedFruit, setSelectedFruit] = useState({value: null});
 	const [fruitData, setFruitData] = useState({"Apfel": [], "Birne": [], "Quitte": [], "Pflaume": []});
@@ -67,7 +71,7 @@ const FruitTypes = () => {
 
 	return <React.Fragment>
 		<NavBar isSticky />
-		<div className={classes.root}>
+		<div className={isDesktop ? classes.desktopRoot : classes.mobileRoot}>
 			<FormControl className={classes.inputContainer}>				
 				<InputLabel className={classes.inputLabel} id="demo-simple-select-outlined-label">Frucht</InputLabel>
 				<Select
