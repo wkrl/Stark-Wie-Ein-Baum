@@ -1,0 +1,121 @@
+import React, { useState, useEffect } from 'react';
+import NavBar from '../components/NavBar';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Slider from '@material-ui/core/Slider';
+import Button from '@material-ui/core/Button';
+
+const axios = require('axios');
+
+const FruitTypes = () => {
+    const [trees, setTrees] = useState([]);
+    const [userSelection, setUserSelection] = useState({
+        "frucht": {}, 
+        "geschmackID": {}, 
+        "tafelobst": false, 
+        "essen": false, 
+        "trinken": false
+    });
+    
+    const handleCheck = (event, prefix) => {     
+        if (prefix) {            
+            let copy = { ...userSelection};
+            copy[prefix][event.target.name] = event.target.checked;
+            setUserSelection(copy);
+        } else {
+            setUserSelection({...userSelection, [event.target.name]: event.target.checked});
+        }                
+    };
+
+    const handleSlide = (value, name) => {
+        setUserSelection({...userSelection, [name]: value});
+    }
+
+	useEffect(() => {
+        axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")
+            .then(response => setTrees(response.data));
+	}, []);
+
+	return <React.Fragment>
+        {console.log(userSelection)}
+		<NavBar isSticky />
+        <FormGroup row>
+            {/* Lieblingsfrucht / früchte */}
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.frucht.Apfel} onChange={e => handleCheck(e, "frucht")} name="Apfel" />}
+                label="Apfel"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.frucht.Pflaume} onChange={e => handleCheck(e, "frucht")} name="Pflaume" />}
+                label="Pflaume"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.frucht.Quitte} onChange={e => handleCheck(e, "frucht")} name="Quitte" />}
+                label="Quitte"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.frucht.Birne} onChange={e => handleCheck(e, "frucht")} name="Birne" />}
+                label="Birne"
+            />
+        </FormGroup>
+        <FormGroup row>
+            {/* Lieblingsgeschmack / geschmäcker */}
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.geschmackID["1"]} onChange={e => handleCheck(e, "geschmackID")} name="1" />}
+                label="säuerlich-aromatisch"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.geschmackID["2"]} onChange={e => handleCheck(e, "geschmackID")} name="2" />}
+                label="kräftig-würzig"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.geschmackID["3"]} onChange={e => handleCheck(e, "geschmackID")} name="3" />}
+                label="mild bis süßlich"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.geschmackID["4"]} onChange={e => handleCheck(e, "geschmackID")} name="4" />}
+                label="süß-säuerlich"
+            />
+        </FormGroup>
+        <FormGroup row>
+            {/* Sofort essen */}
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.tafelobst} onChange={e => handleCheck(e)} name="tafelobst" />}
+                label="Tafelobst"
+            />            
+        </FormGroup>
+        <FormGroup row>
+            {/* Backen, Einwecken, Kochen */}
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.essen} onChange={e => handleCheck(e)} name="essen" />}
+                label="Backen, Einwecken, Kochen"
+            />            
+        </FormGroup>
+        <FormGroup row>
+            {/* Saft, Wein, Brand */}
+            <FormControlLabel
+                control={<Checkbox checked={!!userSelection.trinken} onChange={e => handleCheck(e)} name="trinken" />}
+                label="Saft, Wein, Obstler"
+            />            
+        </FormGroup>
+        <FormGroup row>
+            {/* So viele Monate möchte ich mein Obst lagern */}
+            {/* zero maps to "doesn't matter" */}
+            <Slider 
+                defaultValue={0} 
+                getAriaValueText={t => {return t}} 
+                aria-labelledby="slider" 
+                valueLabelDisplay="auto" 
+                step={1} 
+                marks 
+                min={0} 
+                max={15} 
+                onChange={(_, value) => handleSlide(value, "lagerfaehigkeit")}                
+            />
+        </FormGroup>
+        <Button variant="outlined">Sorten finden</Button>
+	</React.Fragment>
+}
+
+export default FruitTypes; 

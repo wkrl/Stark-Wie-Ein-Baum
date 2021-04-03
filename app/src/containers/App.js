@@ -7,6 +7,7 @@ import { grey, green, deepOrange } from '@material-ui/core/colors';
 import Home from './Home';
 import MapView from './MapView';
 import FruitTypes from './FruitTypes';
+import FavoriteFruit from './FavoriteFruit';
 import Contact from './Contact';
 
 const theme = createMuiTheme({
@@ -33,7 +34,8 @@ class App extends Component {
             <ThemeProvider theme={theme}>
             <Route path="/" exact strict component={Home} />
             <Route path="/karte" component={MapView} />
-            <Route path="/sortenliste" component={FruitTypes} />          
+            <Route path="/sortenliste" component={FruitTypes} />     
+            <Route path="/lieblingssorte" component={FavoriteFruit} />     
             <Route path="/anfrage" component={Contact} />                 
             </ThemeProvider>
           </React.Fragment>
