@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import useGlobal from "../store";
+import  { Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -7,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
 import FruitTypeList from '../components/FruitTypeList';
-import useGlobal from "../store";
-import  { Redirect } from 'react-router-dom';
 
 const axios = require('axios');
 
