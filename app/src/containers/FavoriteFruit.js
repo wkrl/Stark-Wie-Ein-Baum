@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
 import FruitTypeList from '../components/FruitTypeList';
+import useGlobal from "../store";
+import  { Redirect } from 'react-router-dom';
 
 const axios = require('axios');
 
@@ -18,6 +20,8 @@ const FruitTypes = () => {
         "geschmackID": {}, 
         "tafelobst": false,        
     });
+    const [, globalActions] = useGlobal();
+    const [redirect, setRedirect] = useState(false);
     
     const handleCheck = (event, prefix) => {     
         if (prefix) {            
@@ -55,6 +59,13 @@ const FruitTypes = () => {
             .filter(item => { return binarySelectionFilter(item, "tafelobst") })
             .filter(item => { return valueSelectionFilter(item, "lagerfaehigkeit") });
         setFilteredFruitTypes(filteredTypes);        
+    }
+
+    const redirectToMapWithFruitTypes = () => {
+        let ids = [];
+        for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);      
+        globalActions.updateState("fruitTypeIds", ids);
+        setRedirect(true);        
     }
 
 	useEffect(() => {
@@ -128,22 +139,24 @@ const FruitTypes = () => {
             <Typography id="slider">
                 Lagerfähigkeit in Monaten
             </Typography>
-            <Slider 
-                defaultValue={0} 
-                getAriaValueText={text => { return text }} 
-                aria-labelledby="slider" 
-                valueLabelDisplay="auto" 
-                step={1} 
-                marks 
-                min={0} 
-                max={15} 
-                onChange={(_, value) => handleSlide(value, "lagerfaehigkeit")}                
+            <Slider
+                defaultValue={0}
+                getAriaValueText={text => { return text }}
+                aria-labelledby="slider"
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={0}
+                max={15}
+                onChange={(_, value) => handleSlide(value, "lagerfaehigkeit")}
             />
         </FormGroup>
         <Button variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>
         {filteredFruitTypes.length > 0 && <div>
-            <p>Das sind die Sorten, die zu Dir passen:</p>            
-            {filteredFruitTypes.map((fruitType, index) => <FruitTypeList key={index} {...fruitType} />)}            
+            <p>Das sind die Sorten, die zu Dir passen:</p>
+            {filteredFruitTypes.map((fruitType, index) => <FruitTypeList key={index} {...fruitType} />)}
+            <Button variant="outlined" onClick={redirectToMapWithFruitTypes}>Zur Karte</Button>
+            {redirect && <Redirect to='/karte' />}
         </div>}
 	</React.Fragment>
 }
