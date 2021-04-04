@@ -3,24 +3,25 @@ import NavBar from '../components/NavBar';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
+import FruitTypeList from '../components/FruitTypeList';
 
 const axios = require('axios');
 
-const FruitTypes = () => {
-    const [trees, setTrees] = useState([]);
+const FruitTypes = () => {    
+    const [fruitTypes, setFruitTypes] = useState([]);
+    const [filteredFruitTypes, setFilteredFruitTypes] = useState([]);
     const [userSelection, setUserSelection] = useState({
         "frucht": {}, 
         "geschmackID": {}, 
-        "tafelobst": false, 
-        "essen": false, 
-        "trinken": false
+        "tafelobst": false,        
     });
     
     const handleCheck = (event, prefix) => {     
         if (prefix) {            
-            let copy = { ...userSelection};
+            let copy = {...userSelection};
             copy[prefix][event.target.name] = event.target.checked;
             setUserSelection(copy);
         } else {
@@ -29,16 +30,39 @@ const FruitTypes = () => {
     };
 
     const handleSlide = (value, name) => {
-        setUserSelection({...userSelection, [name]: value});
+        setUserSelection({...userSelection, [name]: value});        
+    }
+
+    const binarySelectionFilter = (item, query) => {        
+        return item[query] == userSelection[query] ? 1 : 0;
+    }
+
+    const valueSelectionFilter = (item, query) => {
+        if (!userSelection[query]) return true; // If value 0 or key undefined don't filter
+        return item[query] == userSelection[query];        
+    }
+
+    const multipleSelectionFilter = (item, query) => {
+        let options = [];
+        for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);        
+        for (let option of options) if (item[query] == option) return true;
+    }
+
+    const filterFruitTypes = () => {    
+        const filteredTypes = fruitTypes
+            .filter(item => { return multipleSelectionFilter(item, "frucht") })
+            .filter(item => { return multipleSelectionFilter(item, "geschmackID") })
+            .filter(item => { return binarySelectionFilter(item, "tafelobst") })
+            .filter(item => { return valueSelectionFilter(item, "lagerfaehigkeit") });
+        setFilteredFruitTypes(filteredTypes);        
     }
 
 	useEffect(() => {
         axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")
-            .then(response => setTrees(response.data));
+            .then(response => setFruitTypes(response.data));
 	}, []);
 
 	return <React.Fragment>
-        {console.log(userSelection)}
 		<NavBar isSticky />
         <FormGroup row>
             {/* Lieblingsfrucht / früchte */}
@@ -88,23 +112,25 @@ const FruitTypes = () => {
         <FormGroup row>
             {/* Backen, Einwecken, Kochen */}
             <FormControlLabel
-                control={<Checkbox checked={!!userSelection.essen} onChange={e => handleCheck(e)} name="essen" />}
+                control={<Checkbox checked disabled name="essen" />}
                 label="Backen, Einwecken, Kochen"
             />            
         </FormGroup>
         <FormGroup row>
             {/* Saft, Wein, Brand */}
             <FormControlLabel
-                control={<Checkbox checked={!!userSelection.trinken} onChange={e => handleCheck(e)} name="trinken" />}
+                control={<Checkbox checked disabled name="trinken" />}
                 label="Saft, Wein, Obstler"
             />            
         </FormGroup>
         <FormGroup row>
             {/* So viele Monate möchte ich mein Obst lagern */}
-            {/* zero maps to "doesn't matter" */}
+            <Typography id="slider">
+                Lagerfähigkeit in Monaten
+            </Typography>
             <Slider 
                 defaultValue={0} 
-                getAriaValueText={t => {return t}} 
+                getAriaValueText={text => { return text }} 
                 aria-labelledby="slider" 
                 valueLabelDisplay="auto" 
                 step={1} 
@@ -114,7 +140,11 @@ const FruitTypes = () => {
                 onChange={(_, value) => handleSlide(value, "lagerfaehigkeit")}                
             />
         </FormGroup>
-        <Button variant="outlined">Sorten finden</Button>
+        <Button variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>
+        {filteredFruitTypes.length > 0 && <div>
+            <p>Das sind die Sorten, die zu Dir passen:</p>            
+            {filteredFruitTypes.map((fruitType, index) => <FruitTypeList key={index} {...fruitType} />)}            
+        </div>}
 	</React.Fragment>
 }
 
