@@ -33,13 +33,9 @@ const FruitTypes = () => {
         }                
     };
 
-    const handleSlide = (value, name) => {
-        setUserSelection({...userSelection, [name]: value});        
-    }
+    const handleSlide = (value, name) => setUserSelection({...userSelection, [name]: value});        
 
-    const binarySelectionFilter = (item, query) => {        
-        return item[query] == userSelection[query] ? 1 : 0;
-    }
+    const binarySelectionFilter = (item, query) => { return item[query] == !!userSelection[query] };
 
     const valueSelectionFilter = (item, query) => {
         if (!userSelection[query]) return true; // If value 0 or key undefined don't filter
