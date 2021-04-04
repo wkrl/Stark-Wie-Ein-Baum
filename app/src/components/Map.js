@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import useGlobal from "../store";
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
 import TreeInfoBox from './TreeInfoBox.js';
 import quitteIcon from '../images/icons/quitte_icon.svg';
@@ -7,7 +8,6 @@ import birneIcon from '../images/icons/birne_icon.svg';
 import pflaumeIcon from '../images/icons/pflaume_icon.svg';
 import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
-
 
 const axios = require('axios');
 var map, marker;
@@ -26,11 +26,10 @@ const Map = () => {
         "reihe": null,
         "pflanzreihePosition": null,
     });
+    const [globalState, globalActions] = useGlobal();
 
     const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+        if (reason === 'clickaway') return;        
         setError({ message: "" });
         setClickInfo(false);
     };
@@ -90,15 +89,10 @@ const Map = () => {
             new window.google.maps.Point(47, 47) // icon anchor
         );
 
-        const updateLocationMarker = pos => {
-            marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));
-        }
+        const updateLocationMarker = pos => marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));        
 
         const initDeviceLocationMarker = () => {
-            let options = {
-                enableHighAccuracy: true,
-                timeout: 3000
-            };
+            let options = { enableHighAccuracy: true, timeout: 3000 };
 
             navigator.geolocation.getCurrentPosition(pos => {
                 let position = new window.google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -110,9 +104,7 @@ const Map = () => {
                     () => setError({ message: "Standort konnte nicht abgerufen werden." }),
                     options
                 );
-            }, () => {
-                setError({ message: "Standort konnte nicht abgerufen werden." });
-            });
+            }, () => setError({ message: "Standort konnte nicht abgerufen werden." }));
         }
 
         // Set map data
@@ -128,9 +120,7 @@ const Map = () => {
                 map.data.addGeoJson({ "type": "FeatureCollection", features });
                 setClickInfo(true);
             })
-            .catch(() => {
-                setError({ message: "Bäume konnten nicht geladen werden!" });
-            });
+            .catch(() => setError({ message: "Bäume konnten nicht geladen werden!" }));
 
         // Display info box
         map.data.addListener('click', function (event) {
@@ -147,14 +137,7 @@ const Map = () => {
                 map.data.overrideStyle(feature, { icon: getIconBasedOnFruitname(fruitname) });
             }
 
-            setState({
-                "open": true,
-                "hasSponsor": hasSponsor,
-                "treeId": treeId,
-                "sortenId": sortenId,
-                "reihe": reihe,
-                "pflanzreihePosition": pflanzreihePosition,
-            });
+            setState({ "open": true, "hasSponsor": hasSponsor, "treeId": treeId, "sortenId": sortenId, "reihe": reihe, "pflanzreihePosition": pflanzreihePosition });
 
             clickedIconId = treeId;
             map.data.overrideStyle(event.feature, { icon: mapPin });
@@ -170,14 +153,7 @@ const Map = () => {
             }
 
             // Close info box when clicking on map
-            setState({
-                "open": false,
-                "hasSponsor": null,
-                "treeId": null,
-                "sortenId": null,
-                "reihe": null,
-                "pflanzreihePosition": null,
-            });
+            setState({ "open": false, "hasSponsor": null, "treeId": null, "sortenId": null, "reihe": null, "pflanzreihePosition": null });
         })
     }
 
