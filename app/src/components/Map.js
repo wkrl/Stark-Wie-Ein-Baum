@@ -164,9 +164,7 @@ const Map = () => {
             s.src = 'https://maps.google.com/maps/api/js?key=AIzaSyCdyHnS8ib7S3WTpOe8TD1XjxGbWtHKb-o';
             let x = document.getElementsByTagName('script')[0];
             x.parentNode.insertBefore(s, x);
-            s.addEventListener('load', e => {
-                onScriptLoad()
-            })
+            s.addEventListener('load', () => onScriptLoad())
         } else {
             onScriptLoad()
         }
