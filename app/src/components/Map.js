@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import useGlobal from "../store";
+import { useHistory } from 'react-router-dom';
+import useGlobal from '../store';
+import { useMediaQuery } from '@material-ui/core';
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
 import TreeInfoBox from './TreeInfoBox.js';
+import Chip from '@material-ui/core/Chip';
 import quitteIcon from '../images/icons/quitte_icon.svg';
 import apfelIcon from '../images/icons/apfel_icon.svg';
 import birneIcon from '../images/icons/birne_icon.svg';
 import pflaumeIcon from '../images/icons/pflaume_icon.svg';
 import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
-import Chip from '@material-ui/core/Chip';
 
 const axios = require('axios');
 var map, marker;
 
-const Map = () => {
+const Map = () => {    
     let clickedIconId;
     let features = [];
+
+    const isDesktop = useMediaQuery('(min-width:426px)'); 
+    const history = useHistory();
 
     const [globalState, globalActions] = useGlobal();
     const [error, setError] = React.useState({ message: "" });
@@ -197,7 +202,13 @@ const Map = () => {
                 label={"Sortenfilter"}
                 onDelete={filterDelete}
                 color="primary"
-                style={{ position: 'absolute', top: '82px', left: '12px', zIndex: '1' }} />}
+                style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
+        {globalState.fruitTypeIds.length < 1 && 
+            <Chip
+                label={"Zum Sortenfilter"}
+                onClick={() => history.push("/lieblingssorte")}
+                color="primary"
+                style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
     </React.Fragment>
 }
 

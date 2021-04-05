@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import useGlobal from "../store";
-import  { Redirect } from 'react-router-dom';
+import useGlobal from '../store';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,6 +13,8 @@ import FruitTypeList from '../components/FruitTypeList';
 const axios = require('axios');
 
 const FruitTypes = () => {    
+    const history = useHistory();
+    
     const [fruitTypes, setFruitTypes] = useState([]);
     const [filteredFruitTypes, setFilteredFruitTypes] = useState([]);
     const [userSelection, setUserSelection] = useState({
@@ -21,7 +23,6 @@ const FruitTypes = () => {
         "tafelobst": false,        
     });
     const [, globalActions] = useGlobal();
-    const [redirect, setRedirect] = useState(false);
     
     const handleCheck = (event, prefix) => {     
         if (prefix) {            
@@ -61,7 +62,7 @@ const FruitTypes = () => {
         let ids = [];
         for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);      
         globalActions.updateState("fruitTypeIds", ids);
-        setRedirect(true);        
+        history.push("/karte"); 
     }
 
 	useEffect(() => {
@@ -152,7 +153,6 @@ const FruitTypes = () => {
             <p>Das sind die Sorten, die zu Dir passen:</p>
             {filteredFruitTypes.map((fruitType, index) => <FruitTypeList key={index} {...fruitType} />)}
             <Button variant="outlined" onClick={redirectToMapWithFruitTypes}>Zur Karte</Button>
-            {redirect && <Redirect to='/karte' />}
         </div>}
 	</React.Fragment>
 }
