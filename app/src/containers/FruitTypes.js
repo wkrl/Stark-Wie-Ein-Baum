@@ -7,11 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FruitTypeList from '../components/FruitTypeList';
 
 const axios = require('axios');
 
@@ -86,22 +82,10 @@ const FruitTypes = () => {
 				</Select>
 				<FormHelperText>Wähle eine Frucht aus, um Sorten zu sehen.</FormHelperText>				
 			</FormControl>
-			{selectedFruit.value && fruitData[selectedFruit.value].map(type => <Accordion>
-				<AccordionSummary
-				expandIcon={<ExpandMoreIcon />}
-				aria-controls="panel1a-content"
-				id="panel1a-header"
-				>
-				<Typography>{Object.keys(type)[0]}</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-				<Typography>
-					{type[Object.keys(type)[0]].beschreibung + "\n"}
-					{type[Object.keys(type)[0]].geschmack}
-				</Typography>
-				</AccordionDetails>
-			</Accordion>
-			)}
+			{selectedFruit.value && fruitData[selectedFruit.value].map(type => {
+				const fruiType = {...type[Object.keys(type)[0]], sorte: Object.keys(type)[0]}
+				return <FruitTypeList key={fruiType.sorte} {...fruiType} />
+			})}						
 		</div>
 	</React.Fragment>
 }
