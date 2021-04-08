@@ -64,9 +64,9 @@ const FruitTypes = () => {
 		axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")		
 		.then(response => {
 			response.data.forEach(type => {
-				const {sorte, beschreibung, geschmack, frucht} = type;
+				const {frucht, sorte} = type;
 				let copy = {...fruitData};
-				copy[frucht].push({[sorte]: { beschreibung, geschmack }})
+				copy[frucht].push({[sorte]: type})
 				setFruitData(copy);
 			})
 		})
