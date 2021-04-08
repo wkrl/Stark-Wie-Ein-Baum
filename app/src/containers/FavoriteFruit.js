@@ -141,8 +141,12 @@ const FruitTypes = () => {
         if (months === 0) return "Nur kurz";
     }
 
+    const sortData = data => {
+        return data.sort((a, b) => a.sorte < b.sorte ? -1 : a.sorte > b.sorte ? 1 : 0); 
+    }
+
 	useEffect(() => {
-        if (!fruitTypes.length) axios.get("https://swebapi.demo.datexis.com/api/karte/baeume").then(response => setFruitTypes(response.data));
+        if (!fruitTypes.length) axios.get("https://swebapi.demo.datexis.com/api/karte/baeume").then(response => setFruitTypes(sortData(response.data)));
         if (filteredFruitTypes.length > 0) scrollRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 	}, [filteredFruitTypes]);
 
