@@ -45,6 +45,9 @@ const useStyles = makeStyles(theme => ({
     desktopButton: {  
         margin: '0 0 12px 6px',
     },
+    sliderLabel: {
+        marginLeft: '6px',
+    }
 }));
 
 const FruitTypes = () => {    
@@ -55,6 +58,7 @@ const FruitTypes = () => {
     
     const [fruitTypes, setFruitTypes] = useState([]);
     const [filteredFruitTypes, setFilteredFruitTypes] = useState([]);
+    const [months, setMonths] = useState(0);
     const [userSelection, setUserSelection] = useState({
         "frucht": {}, 
         "geschmackID": {}, 
@@ -72,7 +76,10 @@ const FruitTypes = () => {
         }                
     };
 
-    const handleSlide = (value, name) => setUserSelection({...userSelection, [name]: value});        
+    const handleSlide = (value, name) => {
+        setMonths(value);
+        setUserSelection({...userSelection, [name]: value});
+    };        
 
     const binarySelectionFilter = (item, query) => { return item[query] == !!userSelection[query] };
 
@@ -101,6 +108,11 @@ const FruitTypes = () => {
         for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);      
         globalActions.updateState("fruitTypeIds", ids);
         history.push("/karte"); 
+    }
+
+    const getSliderLabel = () => {
+        if (months > 0) return months > 1 ? `${months} Monate` : `${months} Monat`;
+        if (months === 0) return "Nur kurz";
     }
 
 	useEffect(() => {
@@ -183,20 +195,23 @@ const FruitTypes = () => {
                 <CardContent>
                     <FormGroup row>
                         <Typography id="slider">
-                            Lagerfähigkeit in Monaten
+                            So lange möchte ich mein Obst mindestens lagern:
                         </Typography>
                         <Slider
                             style={{width: '94%', margin: 'auto'}}
                             defaultValue={0}
-                            getAriaValueText={text => { return text }}
                             aria-labelledby="slider"
-                            valueLabelDisplay="auto"
                             step={1}
                             marks
                             min={0}
                             max={15}
                             onChange={(_, value) => handleSlide(value, "lagerfaehigkeit")}
                         />
+                    </FormGroup>
+                    <FormGroup row>
+                        <Typography variant="body2" className={classes.sliderLabel}>
+                            {getSliderLabel()}
+                        </Typography>
                     </FormGroup>
                 </CardContent>
                 <CardActions>                
