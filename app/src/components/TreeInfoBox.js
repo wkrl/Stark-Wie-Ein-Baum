@@ -50,75 +50,20 @@ const useStyles = makeStyles(theme => ({
 
 const TreeInfoBox = (props) => {
     const classes = useStyles();
-    const [showInfo, setShowInfo] = useState(false);
     const [data, setData] = useState({response: null});
     const [error, setError] = useState("");
 
-    const handleClose = (event, reason) => {
+    const handleClose = (_, reason) => {
         if (reason === 'clickaway') {
           return;
         }
         setError(false);
     };
 
-    const renderMoreInfoButton = () => {
-        return (!showInfo &&
-            <Grid container>
-                <Grid item xs={12}>
-                    <Button className={classes.moreInfoButton} size="small" color="primary" onClick={() => setShowInfo(!showInfo)}>
-                        Mehr Infos
-                    </Button>
-                </Grid>
-            </Grid>)
-    }
-
-    const renderMoreInfoField = () => {
-        return (showInfo &&
-            <Grid container spacing={1}>
-                <Grid item xs={12}>
-                    <Typography variant="subtitle1">Andere Namen</Typography>
-                    <Typography variant="body2">{data.response[0].andereNamen}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="subtitle1">Früchte</Typography>
-                    <Typography variant="body2">{data.response[0].beschreibung}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography variant="subtitle1">Verbreitung</Typography>
-                    <Typography variant="body2">{data.response[0].verbreitung}</Typography>
-                </Grid>
-            </Grid>)
-    }
-
-    const renderCardActions = () => {
-        return (<CardActions>
-            <Button size="small" 
-                component={NavLink} 
-                to={{
-                    pathname: "/anfrage", 
-                    state: { 
-                        treeId: props.treeId, 
-                        treeName: data.response[0].sorte, 
-                        reihe:  props.reihe, 
-                        pflanzreihePosition: props.pflanzreihePosition
-                    }
-                }}
-                variant="contained" 
-                style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}
-            >
-                Pate werden
-            </Button>
-            { showInfo &&
-            <Button size="small" color="primary" onClick={() => setShowInfo(!showInfo)}>
-                Weniger Infos
-            </Button>}
-        </CardActions>)
-    }
-
     useEffect(() => {        
         axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")
         .then(response => {
-            let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId);
+            let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId)[0];
             setData({response: baumInfos});
         })
         .catch((e) => {
@@ -127,6 +72,7 @@ const TreeInfoBox = (props) => {
     }, [props.sortenId]);
 
     return <div className={classes.root}>
+        {console.log(data.response)}
         {data.response && 
         <Card className={classes.card}>                        
             <CardContent>
@@ -134,7 +80,7 @@ const TreeInfoBox = (props) => {
                     <CloseIcon />
                 </IconButton>  
                 <Typography variant="h5">
-                    {`${data.response[0].sorte} - Baum ${props.treeId}`}
+                    {`${data.response.sorte} - Baum ${props.treeId}`}
                 </Typography>       
                 <Typography variant="h6" gutterBottom>                    
                     {`Reihe ${props.reihe}, Baum ${props.pflanzreihePosition}`}
@@ -147,25 +93,54 @@ const TreeInfoBox = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Geschmack</Typography>
-                            <Typography variant="body2">{data.response[0].geschmack}</Typography>
+                            <Typography variant="body2">{data.response.geschmack}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Verwendung</Typography>
-                            <Typography variant="body2">{data.response[0].verwendung}</Typography>
+                            <Typography variant="body2">{data.response.verwendung}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Früchte und Baumwuchs</Typography>
+                            <Typography variant="body2">{data.response.beschreibung}</Typography>
+                            <Typography variant="body2">{data.response.groesse}</Typography>                            
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Reifezeit</Typography>
+                            <Typography variant="body2">{data.response.reifezeit}</Typography>
+                        </Grid>              
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Andere Namen</Typography>
+                            <Typography variant="body2">{data.response.andereNamen}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Herkunft</Typography>
-                            <Typography variant="body2">{data.response[0].herkunft}</Typography>
-                        </Grid>
+                            <Typography variant="body2">{data.response.herkunft}</Typography>
+                        </Grid>                                  
                         <Grid item xs={12}>
-                            <Typography variant="body2">{data.response[0].reifezeit}</Typography>
+                            <Typography variant="subtitle1">Verbreitung</Typography>
+                            <Typography variant="body2">{data.response.verbreitung}</Typography>
                         </Grid>
-                    </Grid>
-                    { renderMoreInfoButton() }
-                    { renderMoreInfoField() }
+                    </Grid>                       
                 </div>
             </CardContent>
-            { renderCardActions() }
+            <CardActions>
+                <Button size="small" 
+                    component={NavLink} 
+                    to={{
+                        pathname: "/anfrage", 
+                        state: { 
+                            treeId: props.treeId, 
+                            treeName: data.response.sorte, 
+                            reihe:  props.reihe,
+                            pflanzreihePosition: props.pflanzreihePosition
+                        }
+                    }}
+                    variant="contained" 
+                    style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}
+                >
+                    Pate werden
+                </Button>                
+            </CardActions>
         </Card>}
         <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
