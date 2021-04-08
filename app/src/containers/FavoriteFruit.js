@@ -42,8 +42,8 @@ const useStyles = makeStyles(theme => ({
         display: 'block', 
         width: '100%'
     },
-    desktopButton: {        
-        marginBottom: '12px',        
+    desktopButton: {  
+        margin: '0 0 12px 6px',
     },
 }));
 
@@ -199,7 +199,7 @@ const FruitTypes = () => {
                         />
                     </FormGroup>
                 </CardContent>
-                <CardActions>                    
+                <CardActions>                
                     <Button className={isDesktop ? classes.desktopButton : classes.mobileButton} variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>                    
                 </CardActions>
             </Card>                              
