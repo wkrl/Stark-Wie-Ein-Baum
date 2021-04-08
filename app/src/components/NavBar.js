@@ -62,6 +62,9 @@ const NavBar = (props) => {
           <ListItem button key={"Zu den Bäumen"} component={NavLink} to={"/karte"}>
             <ListItemText primary={"Zu den Bäumen"} />
           </ListItem>
+          <ListItem button key={"Lieblingssorte"} component={NavLink} to={"/lieblingssorte"}>
+            <ListItemText primary={"Lieblingssorte"} />
+          </ListItem>
           <ListItem button key={"Sortenliste"} component={NavLink} to={"/sortenliste"}>
             <ListItemText primary={"Sortenliste"} />
           </ListItem>

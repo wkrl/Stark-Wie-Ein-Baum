@@ -12,6 +12,7 @@ const initialState = {
     nachricht: "",
     status: "",
     telefon: "", 
+    fruitTypeIds: [],    
 }
 
 const useGlobal = useGlobalHook(React, initialState, actions);

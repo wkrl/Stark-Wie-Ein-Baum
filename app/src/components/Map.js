@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import useGlobal from '../store';
+import { useMediaQuery } from '@material-ui/core';
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
 import TreeInfoBox from './TreeInfoBox.js';
+import Chip from '@material-ui/core/Chip';
 import quitteIcon from '../images/icons/quitte_icon.svg';
 import apfelIcon from '../images/icons/apfel_icon.svg';
 import birneIcon from '../images/icons/birne_icon.svg';
@@ -8,14 +12,17 @@ import pflaumeIcon from '../images/icons/pflaume_icon.svg';
 import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
 
-
 const axios = require('axios');
 var map, marker;
 
-const Map = () => {
+const Map = () => {    
     let clickedIconId;
     let features = [];
 
+    const isDesktop = useMediaQuery('(min-width:426px)'); 
+    const history = useHistory();
+
+    const [globalState, globalActions] = useGlobal();
     const [error, setError] = React.useState({ message: "" });
     const [clickInfo, setClickInfo] = React.useState(true);
     const [state, setState] = useState({
@@ -27,10 +34,8 @@ const Map = () => {
         "pflanzreihePosition": null,
     });
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    const handleClose = (_, reason) => {
+        if (reason === 'clickaway') return;        
         setError({ message: "" });
         setClickInfo(false);
     };
@@ -38,17 +43,14 @@ const Map = () => {
     const addResponseToFeatures = (data) => {
         data.forEach(tree => {
             let feature = {
-                "geometry": {
-                    "coordinates": [tree.Latitude, tree.Longitude],
-                    "type": "Point",
-                },
-                "properties": {
-                    "hasSponsor": tree.PatenID === 0 ? false : true,
-                    "treeId": tree.BaumNr,
-                    "sortenId": tree.SortenID,
-                    "frucht": tree.Frucht,
-                    "reihe": tree.Pflanzreihe,
-                    "pflanzreihePosition": tree.PflanzreihePosition,
+                "geometry": { "coordinates": [tree.Latitude, tree.Longitude], "type": "Point" },
+                "properties": { 
+                    "hasSponsor": !!tree.PatenID, 
+                    "treeId": tree.BaumNr, 
+                    "sortenId": tree.SortenID, 
+                    "frucht": tree.Frucht, 
+                    "reihe": tree.Pflanzreihe, 
+                    "pflanzreihePosition": tree.PflanzreihePosition 
                 },
                 "type": "Feature",
                 "id": tree.BaumNr,
@@ -65,23 +67,23 @@ const Map = () => {
     }
 
     const changeGeoJsonIcons = () => {
-        map.data.setStyle(function (feature) {
-            let fruitname = feature.getProperty("frucht");
-            return ({ icon: { url: getIconBasedOnFruitname(fruitname) } });
-        });
+        map.data.setStyle(feature => { return ({ icon: { url: getIconBasedOnFruitname(feature.getProperty("frucht")) } }) });
+    } 
+
+    const filterResponseData = response => {
+        if (globalState.fruitTypeIds.length > 0) {
+            return {...response, data: response.data.filter(tree => globalState.fruitTypeIds.indexOf(tree.SortenID) > -1)};         
+        }
+        return response;
     }
+
+    const filterDelete = () => globalActions.updateState("fruitTypeIds", []);    
 
     const onScriptLoad = () => {
         map = new window.google.maps.Map(
             document.getElementById("map"),
-            {
-                center: { lat: 52.870173, lng: 13.265909 },
-                zoom: 19,
-                minZoom: 17,
-                disableDefaultUI: true,
-                mapTypeId: 'satellite',
-            }
-        )
+            { center: { lat: 52.870173, lng: 13.265909 }, zoom: 19, minZoom: 17, disableDefaultUI: true, mapTypeId: 'satellite' }
+        );
 
         let iconImage = new window.google.maps.MarkerImage(
             deviceIcon,
@@ -90,15 +92,10 @@ const Map = () => {
             new window.google.maps.Point(47, 47) // icon anchor
         );
 
-        const updateLocationMarker = pos => {
-            marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));
-        }
+        const updateLocationMarker = pos => marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));        
 
         const initDeviceLocationMarker = () => {
-            let options = {
-                enableHighAccuracy: true,
-                timeout: 3000
-            };
+            let options = { enableHighAccuracy: true, timeout: 3000 };
 
             navigator.geolocation.getCurrentPosition(pos => {
                 let position = new window.google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -110,14 +107,13 @@ const Map = () => {
                     () => setError({ message: "Standort konnte nicht abgerufen werden." }),
                     options
                 );
-            }, () => {
-                setError({ message: "Standort konnte nicht abgerufen werden." });
-            });
+            }, () => setError({ message: "Standort konnte nicht abgerufen werden." }));
         }
 
         // Set map data
         axios.get("https://swebapi.demo.datexis.com/api/karte")
-            .then(response => {
+            .then(response => filterResponseData(response))
+            .then(response => {                
                 addResponseToFeatures(response.data);
                 if (navigator.geolocation) {
                     initDeviceLocationMarker();
@@ -128,9 +124,7 @@ const Map = () => {
                 map.data.addGeoJson({ "type": "FeatureCollection", features });
                 setClickInfo(true);
             })
-            .catch(() => {
-                setError({ message: "Bäume konnten nicht geladen werden!" });
-            });
+            .catch(() => setError({ message: "Bäume konnten nicht geladen werden!" }));
 
         // Display info box
         map.data.addListener('click', function (event) {
@@ -147,14 +141,7 @@ const Map = () => {
                 map.data.overrideStyle(feature, { icon: getIconBasedOnFruitname(fruitname) });
             }
 
-            setState({
-                "open": true,
-                "hasSponsor": hasSponsor,
-                "treeId": treeId,
-                "sortenId": sortenId,
-                "reihe": reihe,
-                "pflanzreihePosition": pflanzreihePosition,
-            });
+            setState({ "open": true, "hasSponsor": hasSponsor, "treeId": treeId, "sortenId": sortenId, "reihe": reihe, "pflanzreihePosition": pflanzreihePosition });
 
             clickedIconId = treeId;
             map.data.overrideStyle(event.feature, { icon: mapPin });
@@ -170,14 +157,7 @@ const Map = () => {
             }
 
             // Close info box when clicking on map
-            setState({
-                "open": false,
-                "hasSponsor": null,
-                "treeId": null,
-                "sortenId": null,
-                "reihe": null,
-                "pflanzreihePosition": null,
-            });
+            setState({ "open": false, "hasSponsor": null, "treeId": null, "sortenId": null, "reihe": null, "pflanzreihePosition": null });
         })
     }
 
@@ -188,13 +168,11 @@ const Map = () => {
             s.src = 'https://maps.google.com/maps/api/js?key=AIzaSyCdyHnS8ib7S3WTpOe8TD1XjxGbWtHKb-o';
             let x = document.getElementsByTagName('script')[0];
             x.parentNode.insertBefore(s, x);
-            s.addEventListener('load', e => {
-                onScriptLoad()
-            })
+            s.addEventListener('load', () => onScriptLoad())
         } else {
             onScriptLoad()
         }
-    }, [clickedIconId]);
+    }, [clickedIconId, globalState.fruitTypeIds]);
 
     return <React.Fragment>
         <div style={{ display: 'flex', flexDirection: 'column', flexGrow: '1', height: '100vh' }} id="map" />
@@ -212,13 +190,25 @@ const Map = () => {
             />
         </Snackbar>
         {state.open &&
-            <TreeInfoBox parentCallback={(childData) => setState({ "open": childData })}
+            <TreeInfoBox parentCallback={childData => setState({ "open": childData })}
                 key={new Date()}
                 reihe={state.reihe}
                 pflanzreihePosition={state.pflanzreihePosition}
                 treeId={state.treeId}
                 sortenId={state.sortenId}
                 hasSponsor={state.hasSponsor} />}
+        {globalState.fruitTypeIds.length > 0 && 
+            <Chip
+                label={"Sortenfilter"}
+                onDelete={filterDelete}
+                color="primary"
+                style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
+        {globalState.fruitTypeIds.length < 1 && 
+            <Chip
+                label={"Zum Sortenfilter"}
+                onClick={() => history.push("/lieblingssorte")}
+                color="primary"
+                style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
     </React.Fragment>
 }
 
