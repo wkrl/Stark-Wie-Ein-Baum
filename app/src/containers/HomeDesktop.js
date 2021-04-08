@@ -64,10 +64,7 @@ const useStyles = makeStyles(theme => ({
     buttonContainer: {
         display: 'grid',                              
         backgroundImage: `url(${SectionBackground})`,              
-    },
-    mehrInfoButton: {
-        
-    },  
+    },    
     logoContainer: {
         placeSelf: 'center', 
         width: '100%',         
