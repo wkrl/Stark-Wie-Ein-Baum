@@ -63,7 +63,7 @@ const TreeInfoBox = (props) => {
     useEffect(() => {        
         axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")
         .then(response => {
-            let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId);
+            let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId)[0];
             setData({response: baumInfos});
         })
         .catch((e) => {
@@ -72,6 +72,7 @@ const TreeInfoBox = (props) => {
     }, [props.sortenId]);
 
     return <div className={classes.root}>
+        {console.log(data.response)}
         {data.response && 
         <Card className={classes.card}>                        
             <CardContent>
@@ -79,7 +80,7 @@ const TreeInfoBox = (props) => {
                     <CloseIcon />
                 </IconButton>  
                 <Typography variant="h5">
-                    {`${data.response[0].sorte} - Baum ${props.treeId}`}
+                    {`${data.response.sorte} - Baum ${props.treeId}`}
                 </Typography>       
                 <Typography variant="h6" gutterBottom>                    
                     {`Reihe ${props.reihe}, Baum ${props.pflanzreihePosition}`}
@@ -92,34 +93,34 @@ const TreeInfoBox = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Geschmack</Typography>
-                            <Typography variant="body2">{data.response[0].geschmack}</Typography>
+                            <Typography variant="body2">{data.response.geschmack}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Verwendung</Typography>
-                            <Typography variant="body2">{data.response[0].verwendung}</Typography>
+                            <Typography variant="body2">{data.response.verwendung}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Früchte und Baumwuchs</Typography>
+                            <Typography variant="body2">{data.response.beschreibung}</Typography>
+                            <Typography variant="body2">{data.response.groesse}</Typography>                            
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Reifezeit</Typography>
+                            <Typography variant="body2">{data.response.reifezeit}</Typography>
+                        </Grid>              
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">Andere Namen</Typography>
+                            <Typography variant="body2">{data.response.andereNamen}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Herkunft</Typography>
-                            <Typography variant="body2">{data.response[0].herkunft}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="body2">{data.response[0].reifezeit}</Typography>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                            <Typography variant="subtitle1">Andere Namen</Typography>
-                            <Typography variant="body2">{data.response[0].andereNamen}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Typography variant="subtitle1">Früchte</Typography>
-                            <Typography variant="body2">{data.response[0].beschreibung}</Typography>
-                        </Grid>
+                            <Typography variant="body2">{data.response.herkunft}</Typography>
+                        </Grid>                                  
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Verbreitung</Typography>
-                            <Typography variant="body2">{data.response[0].verbreitung}</Typography>
+                            <Typography variant="body2">{data.response.verbreitung}</Typography>
                         </Grid>
-                    </Grid>
+                    </Grid>                       
                 </div>
             </CardContent>
             <CardActions>
@@ -129,8 +130,8 @@ const TreeInfoBox = (props) => {
                         pathname: "/anfrage", 
                         state: { 
                             treeId: props.treeId, 
-                            treeName: data.response[0].sorte, 
-                            reihe:  props.reihe, 
+                            treeName: data.response.sorte, 
+                            reihe:  props.reihe,
                             pflanzreihePosition: props.pflanzreihePosition
                         }
                     }}
