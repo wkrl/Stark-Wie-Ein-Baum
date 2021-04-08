@@ -168,7 +168,7 @@ const FruitTypes = () => {
                     <FormGroup row>                        
                         <FormControlLabel
                             control={<Checkbox checked={!!userSelection.tafelobst} onChange={e => handleCheck(e)} name="tafelobst" />}
-                            label="Tafelobst"
+                            label="Frisch essen"
                         />
                         <FormControlLabel
                             control={<Checkbox checked disabled name="essen" />}
