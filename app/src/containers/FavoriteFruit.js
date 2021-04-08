@@ -37,6 +37,14 @@ const useStyles = makeStyles(theme => ({
             marginBottom: '12px',
         }
     },
+    mobileButton: {
+        margin: '6px', 
+        display: 'block', 
+        width: '100%'
+    },
+    desktopButton: {        
+        marginBottom: '12px',        
+    },
 }));
 
 const FruitTypes = () => {    
@@ -113,7 +121,7 @@ const FruitTypes = () => {
             </Card>
             <Card>
                 <CardContent>
-                    <Typography variant="h6" gutterBottom>Sortenfinder</Typography>
+                    <Typography variant="h6" gutterBottom>Sortenfinder</Typography>                    
                     <Typography variant="body1" style={{paddingTop: '4px'}} gutterBottom>Lieblingsfrucht / früchte:</Typography>
                     <FormGroup row>
                         <FormControlLabel
@@ -135,8 +143,8 @@ const FruitTypes = () => {
                     </FormGroup>
                 </CardContent>
                 <CardContent>
+                    <Typography variant="body1" gutterBottom>Lieblingsgeschmack / geschmäcker:</Typography>
                     <FormGroup row>
-                        <Typography variant="body1" gutterBottom>Lieblingsgeschmack / geschmäcker:</Typography>
                         <FormControlLabel
                             control={<Checkbox checked={!!userSelection.geschmackID["1"]} onChange={e => handleCheck(e, "geschmackID")} name="1" />}
                             label="säuerlich-aromatisch"
@@ -162,14 +170,10 @@ const FruitTypes = () => {
                             control={<Checkbox checked={!!userSelection.tafelobst} onChange={e => handleCheck(e)} name="tafelobst" />}
                             label="Tafelobst"
                         />
-                    </FormGroup>
-                    <FormGroup row>
                         <FormControlLabel
                             control={<Checkbox checked disabled name="essen" />}
                             label="Backen, Einwecken, Kochen"
                         />
-                    </FormGroup>
-                    <FormGroup row>
                         <FormControlLabel
                             control={<Checkbox checked disabled name="trinken" />}
                             label="Saft, Wein, Obstler"                            
@@ -195,8 +199,8 @@ const FruitTypes = () => {
                         />
                     </FormGroup>
                 </CardContent>
-                <CardActions>
-                    <Button style={{margin: '6px', display: 'block', width: '100%'}} variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>        
+                <CardActions>                    
+                    <Button className={isDesktop ? classes.desktopButton : classes.mobileButton} variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>                    
                 </CardActions>
             </Card>                              
             {filteredFruitTypes.length > 0 && <div ref={scrollRef}>
