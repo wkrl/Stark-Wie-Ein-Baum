@@ -148,7 +148,7 @@ const FruitTypes = () => {
 	useEffect(() => {
         if (!fruitTypes.length) axios.get("https://swebapi.demo.datexis.com/api/karte/baeume").then(response => setFruitTypes(sortData(response.data)));
         if (filteredFruitTypes.length > 0) scrollRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-	}, [filteredFruitTypes]);
+	}, [filteredFruitTypes.length, fruitTypes.length]);
 
 	return <React.Fragment>
 		<NavBar isSticky />
