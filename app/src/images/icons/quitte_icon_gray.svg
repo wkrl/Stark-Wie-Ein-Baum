@@ -1,7 +1,9 @@
 <svg width="42" height="45" viewBox="0 0 42 45" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g opacity="0.4">
 <path d="M34.9998 5.12793H0.0244141V44.9998H34.9998V5.12793Z" fill="url(#pattern0)"/>
 <g filter="url(#filter0_d)">
 <path d="M32.9016 6.5271H20.3105V25.4138H32.9016V6.5271Z" fill="url(#pattern1)"/>
+</g>
 </g>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
