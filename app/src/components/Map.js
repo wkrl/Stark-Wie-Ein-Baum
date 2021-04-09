@@ -145,7 +145,6 @@ const Map = () => {
             // If clicked feature exists, reset icon
             if (clickedIconId && clickedIconId !== treeId) {
                 let feature = map.data.getFeatureById(clickedIconId);
-                let fruitname = feature.getProperty("frucht");
                 map.data.overrideStyle(feature, { icon: getIcon(feature) });
             }
 
@@ -160,7 +159,6 @@ const Map = () => {
             // If clicked feature exists, reset icon
             if (clickedIconId) {
                 let feature = map.data.getFeatureById(clickedIconId);
-                let fruitname = feature.getProperty("frucht");
                 map.data.overrideStyle(feature, { icon: getIcon(feature) });
             }
 
