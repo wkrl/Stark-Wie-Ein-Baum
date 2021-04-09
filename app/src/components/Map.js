@@ -9,6 +9,10 @@ import quitteIcon from '../images/icons/quitte_icon.svg';
 import apfelIcon from '../images/icons/apfel_icon.svg';
 import birneIcon from '../images/icons/birne_icon.svg';
 import pflaumeIcon from '../images/icons/pflaume_icon.svg';
+import grayQuitteIcon from '../images/icons/quitte_icon_gray.svg';
+import grayApfelIcon from '../images/icons/apfel_icon_gray.svg';
+import grayBirneIcon from '../images/icons/birne_icon_gray.svg';
+import grayPflaumeIcon from '../images/icons/pflaume_icon_gray.svg';
 import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
 
@@ -57,17 +61,21 @@ const Map = () => {
             }
             features.push(feature);
         });
+    }    
+
+    const getIcon = (feature) => {
+        const isFilteredMap = globalState.fruitTypeIds.length > 0; 
+        const name = feature.getProperty("frucht");
+        const hasSponsor = feature.getProperty("hasSponsor");
+
+        if (name === "Apfel") return isFilteredMap ? hasSponsor ? apfelIcon : grayApfelIcon : apfelIcon;
+        if (name === "Quitte") return isFilteredMap ? hasSponsor ? quitteIcon : grayQuitteIcon : quitteIcon;
+        if (name === "Pflaume") return isFilteredMap ? hasSponsor ? pflaumeIcon : grayPflaumeIcon : pflaumeIcon;
+        if (name === "Birne") return isFilteredMap? hasSponsor ? birneIcon : grayBirneIcon : birneIcon;    
     }
 
-    const getIconBasedOnFruitname = (name) => {
-        if (name === "Apfel") return apfelIcon;
-        if (name === "Quitte") return quitteIcon;
-        if (name === "Pflaume") return pflaumeIcon;
-        if (name === "Birne") return birneIcon;
-    }
-
-    const changeGeoJsonIcons = () => {
-        map.data.setStyle(feature => { return ({ icon: { url: getIconBasedOnFruitname(feature.getProperty("frucht")) } }) });
+    const changeGeoJsonIcons = () => {        
+        map.data.setStyle(feature => { return ({ icon: { url: getIcon(feature) } }) });        
     } 
 
     const filterResponseData = response => {
@@ -138,7 +146,7 @@ const Map = () => {
             if (clickedIconId && clickedIconId !== treeId) {
                 let feature = map.data.getFeatureById(clickedIconId);
                 let fruitname = feature.getProperty("frucht");
-                map.data.overrideStyle(feature, { icon: getIconBasedOnFruitname(fruitname) });
+                map.data.overrideStyle(feature, { icon: getIcon(feature) });
             }
 
             setState({ "open": true, "hasSponsor": hasSponsor, "treeId": treeId, "sortenId": sortenId, "reihe": reihe, "pflanzreihePosition": pflanzreihePosition });
@@ -153,7 +161,7 @@ const Map = () => {
             if (clickedIconId) {
                 let feature = map.data.getFeatureById(clickedIconId);
                 let fruitname = feature.getProperty("frucht");
-                map.data.overrideStyle(feature, { icon: getIconBasedOnFruitname(fruitname) });
+                map.data.overrideStyle(feature, { icon: getIcon(feature) });
             }
 
             // Close info box when clicking on map
