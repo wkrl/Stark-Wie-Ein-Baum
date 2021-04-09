@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 const SignUp = (props) => {
     const classes = useStyles();
-    const [globalState, globalActions] = useGlobal();
+    const [globalState,] = useGlobal();
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [warning, setWarning] = React.useState(false);
