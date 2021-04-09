@@ -97,8 +97,8 @@ const FruitTypes = () => {
 			</Card>
 			<div>
 				{selectedFruit.value && fruitData[selectedFruit.value].map(type => {
-					const fruiType = {...type[Object.keys(type)[0]], sorte: Object.keys(type)[0]}
-					return <FruitTypeList key={fruiType.sorte} {...fruiType} />
+					const fruitType = {...type[Object.keys(type)[0]], sorte: Object.keys(type)[0]}
+					return <FruitTypeList key={fruitType.sorte} {...fruitType} />
 				})}
 			</div>
 		</div>
