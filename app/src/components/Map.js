@@ -68,10 +68,10 @@ const Map = () => {
         const name = feature.getProperty("frucht");
         const hasSponsor = feature.getProperty("hasSponsor");
 
-        if (name === "Apfel") return isFilteredMap ? hasSponsor ? apfelIcon : grayApfelIcon : apfelIcon;
-        if (name === "Quitte") return isFilteredMap ? hasSponsor ? quitteIcon : grayQuitteIcon : quitteIcon;
-        if (name === "Pflaume") return isFilteredMap ? hasSponsor ? pflaumeIcon : grayPflaumeIcon : pflaumeIcon;
-        if (name === "Birne") return isFilteredMap? hasSponsor ? birneIcon : grayBirneIcon : birneIcon;    
+        if (name === "Apfel") return isFilteredMap ? !hasSponsor ? apfelIcon : grayApfelIcon : apfelIcon;
+        if (name === "Quitte") return isFilteredMap ? !hasSponsor ? quitteIcon : grayQuitteIcon : quitteIcon;
+        if (name === "Pflaume") return isFilteredMap ? !hasSponsor ? pflaumeIcon : grayPflaumeIcon : pflaumeIcon;
+        if (name === "Birne") return isFilteredMap? !hasSponsor ? birneIcon : grayBirneIcon : birneIcon;    
     }
 
     const changeGeoJsonIcons = () => {        

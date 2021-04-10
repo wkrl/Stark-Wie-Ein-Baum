@@ -72,7 +72,6 @@ const TreeInfoBox = (props) => {
     }, [props.sortenId]);
 
     return <div className={classes.root}>
-        {console.log(data.response)}
         {data.response && 
         <Card className={classes.card}>                        
             <CardContent>
