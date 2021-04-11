@@ -104,8 +104,9 @@ const TreeInfoBox = (props) => {
                             <Typography variant="body2">{data.response.groesse}</Typography>                            
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="subtitle1">Reifezeit</Typography>
+                            <Typography variant="subtitle1">Reifezeit und Lagerfähigkeit</Typography>
                             <Typography variant="body2">{data.response.reifezeit}</Typography>
+                            <Typography variant="body2">Die Lagerzeit beträgt {data.response.lagerfaehigkeit} {data.response.lagerfaehigkeit > 1 ? "Monate" : data.response.lagerfaehigkeit == 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
                         </Grid>              
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Andere Namen</Typography>
