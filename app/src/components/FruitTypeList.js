@@ -31,20 +31,12 @@ const FruitTypeList = props => {
             </Grid>                                    
         </AccordionSummary>
         <AccordionDetails>
-            <Typography variant="body1">{props.beschreibung}</Typography>
+            <Typography variant="body1">{props.geschmack}</Typography>
         </AccordionDetails>
         {!moreInfo && <AccordionDetails>
             <Button onClick={() => setMoreInfo(!moreInfo)}>Mehr Infos</Button>        
         </AccordionDetails>}
-        {moreInfo && <div>
-            <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
-                    <Typography variant="body1">Geschmack</Typography>            
-                </Grid>    
-                <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.geschmack}</Typography>
-                </Grid>                                  
-            </AccordionDetails>
+        {moreInfo && <div>           
             <AccordionDetails>        
                 <Grid item xs={4} lg={2}>
                     <Typography variant="body1">Verwendung</Typography>            
@@ -54,35 +46,19 @@ const FruitTypeList = props => {
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
-                    <Typography variant="body1">Verbreitung</Typography>            
+                <Grid item xs={4} lg={2}>                    
+                    <Typography variant="body1">Früchte und Baumwuchs</Typography>            
                 </Grid>    
                 <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.verbreitung}</Typography>
+                    <Typography variant="body2">{props.beschreibung} {props.groesse}</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
-                    <Typography variant="body1">Reifezeit</Typography>            
+                <Grid item xs={4} lg={2}>                 
+                    <Typography variant="body1">Reifezeit und Lagerfähigkeit</Typography>            
                 </Grid>    
                 <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.reifezeit}</Typography>
-                </Grid>                                  
-            </AccordionDetails>
-            <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
-                    <Typography variant="body1">Herkunft</Typography>            
-                </Grid>    
-                <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.herkunft}</Typography>
-                </Grid>                                  
-            </AccordionDetails>
-            <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
-                    <Typography variant="body1">Baumwuchs</Typography>            
-                </Grid>    
-                <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.groesse}</Typography>
+                    <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit == 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
@@ -93,6 +69,22 @@ const FruitTypeList = props => {
                     <Typography variant="body2">{props.andereNamen}</Typography>
                 </Grid>                                  
             </AccordionDetails>
+            <AccordionDetails>        
+                <Grid item xs={4} lg={2}>
+                    <Typography variant="body1">Herkunft</Typography>            
+                </Grid>    
+                <Grid item xs={8} lg={10}>
+                    <Typography variant="body2">{props.herkunft}</Typography>
+                </Grid>                                  
+            </AccordionDetails>        
+            <AccordionDetails>        
+                <Grid item xs={4} lg={2}>
+                    <Typography variant="body1">Verbreitung</Typography>            
+                </Grid>    
+                <Grid item xs={8} lg={10}>
+                    <Typography variant="body2">{props.verbreitung}</Typography>
+                </Grid>                                  
+            </AccordionDetails>                
             <AccordionDetails>
                 <Button onClick={() => setMoreInfo(!moreInfo)}>Weniger Infos</Button>        
             </AccordionDetails>
