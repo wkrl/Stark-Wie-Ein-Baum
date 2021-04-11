@@ -61,17 +61,9 @@ const useStyles = makeStyles(theme => ({
         margin: '0 15px 0 15px',         
         textAlign: 'justify', 
     },
-    buttonContainer: {
-        display: 'grid',                              
+    mapButtonContainer: {
         backgroundImage: `url(${SectionBackground})`,              
-    },    
-    logoContainer: {
-        placeSelf: 'center', 
-        width: '100%',         
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        margin: '12px 0 0 0', 
-    }, 
+    },        
     footer: {
         textAlign: 'center', 
         padding: '1vh 0 0 0',
@@ -122,31 +114,45 @@ const HomeDesktop = () => {
                                     <Typography variant="body1" color="primary">531 Bäume für den guten Zweck</Typography>
                                 </div>                         
                                 <div className={classes.cardContent}>
-                                    <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte.</Typography>
+                                    <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.</Typography>
                                 </div>                                                           
-                                <div className={classes.buttonContainer}>
-                                    <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>
-                                </div>
+                                <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">
+                                    <Grid item xs={4}>
+                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sortenfilter</Button>                                        
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>                                    
+                                    </Grid>                                                                                                            
+                                </Grid>
                             </div>    
                         </Card>                
                     </Grid> 
                     <Grid item lg={4} xs={12}>
-                        <Card className={classes.card}>                            
-                            <div style={{display: 'grid', gridTemplateRows: '3fr 2fr', height: '100%', textAlign: 'center'}}>
-                                <div className={classes.logoContainer}>
-                                    <Link href="https://www.hof-grueneberg.de/stiftung/stiftung-hof-grueneberg/">
-                                        <img className={classes.sectionLogo} src={LogoStiftung} alt="Stiftung Logo"></img>                    
-                                    </Link>
-                                    <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
-                                        <img className={classes.sectionLogo} src={LogoCaritas} alt="Caritas Logo"></img>
-                                    </Link>
-                                </div>
-                                <div style={{display: 'grid'}}>
-                                    <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
-                                        <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
-                                    </Link>
-                                </div>
-                            </div>                                   
+                        <Card className={classes.card}>   
+                        <div style={{display: 'grid', gridTemplateRows: '3fr 2fr', height: '100%', textAlign: 'center'}}>
+                                <Grid container direction="row" justify="space-evenly" alignItems="center">
+                                    <Grid item xs={6}>
+                                        <Link href="https://www.hof-grueneberg.de/stiftung/stiftung-hof-grueneberg/">
+                                            <img className={classes.sectionLogo} src={LogoStiftung} alt="Stiftung Logo"></img>                    
+                                        </Link>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Link href="https://www.caritas-berlin.de/beratungundhilfe/berlin/hospizdienste/kinderhospiz-und-familienbesuchsdienst">
+                                            <img className={classes.sectionLogo} src={LogoCaritas} alt="Caritas Logo"></img>
+                                        </Link>
+                                    </Grid>                                                                                
+                                </Grid>                                    
+                                <Grid container direction="row" justify="space-evenly" alignItems="center">
+                                    <Grid item xs={12}>
+                                        <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
+                                            <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
+                                        </Link>
+                                    </Grid>                                                                                                            
+                                </Grid>
+                            </div>
                         </Card>            
                     </Grid>            
                 </React.Fragment> : 
