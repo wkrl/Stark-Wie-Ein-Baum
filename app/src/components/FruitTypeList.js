@@ -58,7 +58,7 @@ const FruitTypeList = props => {
                     <Typography variant="body1">Reifezeit und Lagerfähigkeit</Typography>            
                 </Grid>    
                 <Grid item xs={8} lg={10}>
-                    <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit == 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
+                    <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        

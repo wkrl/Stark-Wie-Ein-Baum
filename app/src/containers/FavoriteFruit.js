@@ -116,7 +116,7 @@ const FruitTypes = () => {
         if (Object.entries(userSelection[query]).length === 0) return true; // No filter set
         let options = [];
         for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);      
-        if (options.length === 0) return true;  
+        if (options.length === 0) return true;        
         for (let option of options) if (item[query] == option) return true;
     }
 
