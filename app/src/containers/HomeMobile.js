@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
         background: `url(${SectionBackground}) no-repeat`, 
         backgroundSize: 'cover', 
     }, 
+    mapButtonSection: {
+        paddingTop: '16px',
+    },
     tree: {
         width: '100%', 
         height: 'auto',  
@@ -64,24 +67,34 @@ const HomeMobile = () => {
                     <Typography variant="body2" color="secondary" gutterBottom>
                         Helfen Sie Familien mit einem schwer erkrankten Kind oder Jugendlichen. Unterstützen Sie gleichzeitig ein wichtiges Naturschutzprojekt.
                     </Typography> 
-                    <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{float: 'right', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>
+                    <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{float: 'right', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>                
                 </Grid>                                
             </Grid>            
-            <Grid container className={classes.mapSection}>
+            <Grid container justify="space-evenly" alignItems="center" className={classes.mapSection}>
+                <Grid item xs={12}>
+                    <Typography variant="body1" color="primary" gutterBottom>
+                        531 Bäume für den guten Zweck
+                    </Typography>
+                </Grid>             
                 <Grid item xs={3}>
                     <img className={classes.tree} src={Logo} alt="'Stark wie ein Baum' Logo" />
-                </Grid>
+                </Grid>                                
                 <Grid item container xs={9} spacing={1}>     
-                    <Grid item>
-                        <Typography variant="body1" color="primary">
-                            531 Bäume für den guten Zweck
-                        </Typography>
-                        <Typography variant="body2" color="secondary" gutterBottom>
+                    <Grid item>                        
+                        <Typography variant="body2" color="secondary" gutterBottom style={{padding: '6px'}}>
                             Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte.
-                        </Typography>
-                        <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}} component={NavLink} to={() => "/karte"}>Zu den Bäumen</Button>
-                    </Grid>               
-                </Grid>
+                        </Typography>                        
+                        <Button variant="contained" size="small" style={{margin: '6px', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}} component={NavLink} to={() => "/karte"}>Zu den Bäumen</Button>                        
+                    </Grid>                                   
+                </Grid>              
+                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                    
+                    <Grid item xs={6}>
+                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sortenfilter</Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>                                        
+                    </Grid>
+                </Grid>  
             </Grid>  
             <Grid container className={classes.textSection}>
                 <Grid item xs={12}>
