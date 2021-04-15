@@ -82,17 +82,17 @@ const HomeMobile = () => {
                 <Grid item container xs={9} spacing={1}>     
                     <Grid item>                        
                         <Typography variant="body2" color="secondary" gutterBottom style={{padding: '6px'}}>
-                            Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte.
+                            Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.
                         </Typography>                        
                         <Button variant="contained" size="small" style={{margin: '6px', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}} component={NavLink} to={() => "/karte"}>Zu den Bäumen</Button>                        
                     </Grid>                                   
                 </Grid>              
-                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                    
+                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                                        
                     <Grid item xs={6}>
-                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sortenfilter</Button>
+                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Alle Sorten</Button>                                        
                     </Grid>
                     <Grid item xs={6}>
-                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>                                        
+                        <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>
                     </Grid>
                 </Grid>  
             </Grid>  
