@@ -264,7 +264,7 @@ const FruitTypes = () => {
                     </Grid>                    
                 </CardContent>
                 <div className={classes.listWrapper}>
-                    {filteredFruitTypes.map((fruitType, index) => <div className={classes.listContainer} key={index}><FruitTypeList {...fruitType} /></div>)}                
+                    {filteredFruitTypes.map((fruitType, index) => <div className={classes.listContainer} key={index+Date.now()}><FruitTypeList {...fruitType} /></div>)}                
                 </div>                
             </Card>}                     
         </div>

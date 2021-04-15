@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -38,50 +38,50 @@ const FruitTypeList = props => {
         </AccordionDetails>}
         {moreInfo && <div>           
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
+                <Grid item xs={5} lg={2}>
                     <Typography variant="body1">Verwendung</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.verwendung}</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>                    
+                <Grid item xs={5} lg={2}>                    
                     <Typography variant="body1">Früchte und Baumwuchs</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.beschreibung} {props.groesse}</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>                 
+                <Grid item xs={5} lg={2}>                 
                     <Typography variant="body1">Reifezeit und Lagerfähigkeit</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
+                <Grid item xs={5} lg={2}>
                     <Typography variant="body1">Andere Namen</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.andereNamen}</Typography>
                 </Grid>                                  
             </AccordionDetails>
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
+                <Grid item xs={5} lg={2}>
                     <Typography variant="body1">Herkunft</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.herkunft}</Typography>
                 </Grid>                                  
             </AccordionDetails>        
             <AccordionDetails>        
-                <Grid item xs={4} lg={2}>
+                <Grid item xs={5} lg={2}>
                     <Typography variant="body1">Verbreitung</Typography>            
                 </Grid>    
-                <Grid item xs={8} lg={10}>
+                <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.verbreitung}</Typography>
                 </Grid>                                  
             </AccordionDetails>                
