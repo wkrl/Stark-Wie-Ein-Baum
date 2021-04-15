@@ -116,16 +116,16 @@ const HomeDesktop = () => {
                                 <div className={classes.cardContent}>
                                     <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.</Typography>
                                 </div>                                                           
-                                <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">
+                                <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">                                    
                                     <Grid item xs={4}>
-                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sortenfilter</Button>                                        
-                                    </Grid>
+                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Alle Sorten</Button>
+                                    </Grid>         
                                     <Grid item xs={4}>
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
                                     <Grid item xs={4}>
-                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>
-                                    </Grid>                                                                                                                                                
+                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sorten finden</Button>                                        
+                                    </Grid>                                                                    
                                 </Grid>
                             </div>    
                         </Card>                
