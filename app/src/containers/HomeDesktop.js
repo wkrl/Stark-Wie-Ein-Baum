@@ -118,13 +118,13 @@ const HomeDesktop = () => {
                                 </div>                                                           
                                 <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">                                    
                                     <Grid item xs={4}>
-                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Alle Sorten</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Alle Sorten</Button>
                                     </Grid>         
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>                                    
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
                                     <Grid item xs={4}>
-                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sorten finden</Button>                                        
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
                                     </Grid>                                                                    
                                 </Grid>
                             </div>    
