@@ -121,11 +121,11 @@ const HomeDesktop = () => {
                                         <Button variant="outlined" size="small" component={NavLink} to={() => "/lieblingssorte"}>Sortenfilter</Button>                                        
                                     </Grid>
                                     <Grid item xs={4}>
-                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Zu den Bäumen</Button>                                    
-                                    </Grid>                                                                                                            
+                                        <Button variant="outlined" size="small" component={NavLink} to={() => "/sortenliste"}>Sortenliste</Button>
+                                    </Grid>                                                                                                                                                
                                 </Grid>
                             </div>    
                         </Card>                
