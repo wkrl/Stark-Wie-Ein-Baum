@@ -118,7 +118,7 @@ const HomeDesktop = () => {
                                 </div>                                                           
                                 <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">                                    
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Alle Sorten</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
                                     </Grid>         
                                     <Grid item xs={4}>
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
@@ -168,7 +168,7 @@ const HomeDesktop = () => {
                                 </Grid>         
                                 <Grid container justify="space-evenly" className={classes.mapButtonContainer} style={{padding: '18px'}}>
                                     <Grid item xs={3}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Alle Sorten</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
                                     </Grid>         
                                     <Grid item xs={3}>
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    

@@ -89,7 +89,7 @@ const HomeMobile = () => {
                 </Grid>              
                 <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                                        
                     <Grid item xs={6}>
-                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Alle Sorten</Button>                                        
+                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>                                        
                     </Grid>
                     <Grid item xs={6}>
                         <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>
