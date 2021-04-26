@@ -167,13 +167,13 @@ const HomeDesktop = () => {
                                     <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.</Typography>
                                 </Grid>         
                                 <Grid container justify="space-evenly" className={classes.mapButtonContainer} style={{padding: '18px'}}>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={3} style={{textAlign: 'center'}}>                                        
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
                                     </Grid>         
-                                    <Grid item xs={3}>
+                                    <Grid item xs={3} style={{textAlign: 'center'}}>
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={3} style={{textAlign: 'center'}}>
                                         <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
                                     </Grid>
                                 </Grid>                                                                                                                                                   
