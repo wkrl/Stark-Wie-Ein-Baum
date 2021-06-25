@@ -11,40 +11,40 @@ import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      position: 'absolute', 
+      position: 'absolute',
       top: '0',
-      left: '0', 
+      left: '0',
       z: '1',
       width: '100%',
-      flexGrow: 1,    
+      flexGrow: 1,
     },
     rootIfSticky: {
-      position: 'sticky', 
+      position: 'sticky',
       top: '0',
-      left: '0', 
+      left: '0',
       zIndex: '2',
       width: '100%',
-      flexGrow: 1,    
+      flexGrow: 1,
     },
     appbar: {
       background: theme.background,
-      // boxShadow: 'none',     
+      // boxShadow: 'none',
     },
     title: {
       flexGrow: 1,
-      fontWeight: '400', 
-    },  
+      fontWeight: '400',
+    },
     list: {
       width: 250,
     },
 }));
 
 const NavBar = (props) => {
-    const classes = useStyles(); 
+    const classes = useStyles();
     const [state, setState] = React.useState({
         right: false,
     });
-    
+
     const sideList = () => (
       <div
         className={classes.list}
@@ -52,7 +52,7 @@ const NavBar = (props) => {
           onClick={() => setState({ right: false })}
           onKeyDown={() => setState({ right: false })}
         >
-        <List>  
+        <List>
           <ListItem button key={"Home"} component={NavLink} to={"/"}>
             <ListItemText primary={"Home"} />
           </ListItem>
@@ -62,6 +62,9 @@ const NavBar = (props) => {
           <ListItem button key={"Zu den Bäumen"} component={NavLink} to={"/karte"}>
             <ListItemText primary={"Zu den Bäumen"} />
           </ListItem>
+          <ListItem button key={"Routen"} component={NavLink} to={"/routen"}>
+            <ListItemText primary={"Routen"} />
+          </ListItem>
           <ListItem button key={"Lieblingssorte"} component={NavLink} to={"/lieblingssorte"}>
             <ListItemText primary={"Lieblingssorte"} />
           </ListItem>
@@ -69,8 +72,8 @@ const NavBar = (props) => {
             <ListItemText primary={"Sortenliste"} />
           </ListItem>
           <Link href="http://www.stark-wie-ein-baum.de/" color="inherit" underline="none">
-            <ListItem button key={"Mehr Infos"}>          
-                <ListItemText primary={"Mehr Infos"} />            
+            <ListItem button key={"Mehr Infos"}>
+                <ListItemText primary={"Mehr Infos"} />
             </ListItem>
           </Link>
         </List>
