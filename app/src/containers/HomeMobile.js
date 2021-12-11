@@ -131,7 +131,7 @@ const HomeMobile = () => {
                 </Grid>
                 <Grid item xs={12} style={{padding:'4% 16% 2% 16%'}}>
                     <Typography variant="caption" color="secondary">
-                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.beuth-hochschule.de/">Beuth Hochschule für Technik Berlin</Link>.
+                        Web-App programmiert von <Link href="https://de.linkedin.com/in/katharinasachs-infopsy" className={classes.linkedInLink}>Katharina Sachs</Link> und <Link href="https://www.linkedin.com/in/karl-brendel-805bab199/" className={classes.linkedInLink}>Karl Brendel</Link> in Kooperation mit der <Link href="https://www.bht-berlin.de/">Berliner Hochschule für Technik</Link>.
                     </Typography>
                 </Grid>
             </Grid>
