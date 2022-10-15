@@ -37,7 +37,7 @@
     "react-dom": "^16.14.0",
     "react-global-hook": "^1.4.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^5.0.1",
     "use-global-hook": "^0.1.13",
     "yarn": "^1.22.10"
   },
