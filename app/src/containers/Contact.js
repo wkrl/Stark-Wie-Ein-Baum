@@ -4,8 +4,10 @@ import Message from '../components/Message';
 import InputField from '../components/InputField'; 
 import { Typography, Button, Grid, makeStyles, Snackbar, SnackbarContent } from '@material-ui/core';
 import useGlobal from '../store';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
-const axios = require('axios');
+
 axios.defaults.baseURL = 'https://swebapi.demo.datexis.com'; 
 
 const useStyles = makeStyles(theme => ({
@@ -38,9 +40,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const SignUp = (props) => {
+const SignUp = () => {
     const classes = useStyles();
-    const [globalState,] = useGlobal();
+    const [globalState] = useGlobal();
     const [success, setSuccess] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [warning, setWarning] = React.useState(false);
@@ -78,6 +80,8 @@ const SignUp = (props) => {
         })
         .catch(() => setError(true))
     }
+
+    let location = useLocation();
 
     return <React.Fragment>
         <NavBar isSticky></NavBar>        
@@ -124,8 +128,9 @@ const SignUp = (props) => {
                     <Grid item xs={12}>
                         <Typography className={classes.required} variant="body2" gutterBottom>Nachricht</Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                        <InputField name="nachricht" selectedTree={props.location.state ? props.location.state : null} textArea></InputField>
+                    <Grid item xs={12}>     
+                        {console.log(location)}           
+                        <InputField name="nachricht" selectedTree={location.state ? location.state : null} textArea></InputField>                     
                     </Grid>
                     <Grid item xs={12}>
                         <Button style={{ float: "right", marginBottom: "10px", }} variant="outlined" size="medium" onClick={() => checkInput()}>Senden</Button>
@@ -133,7 +138,7 @@ const SignUp = (props) => {
                     </Grid>
                 </Grid>
             </div>
-        </div>
+        </div>       
         <Snackbar open={warning} autoHideDuration={6000} onClose={handleClose}>
         <SnackbarContent style={{backgroundColor: 'rgb(242, 159, 51)'}}
             message={"Bitte alle mit * markierten Felder ausfüllen."}

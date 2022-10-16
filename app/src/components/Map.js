@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useGlobal from '../store';
 import { useMediaQuery } from '@material-ui/core';
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
@@ -15,8 +15,8 @@ import grayBirneIcon from '../images/icons/birne_icon_gray.svg';
 import grayPflaumeIcon from '../images/icons/pflaume_icon_gray.svg';
 import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
+import axios from 'axios';
 
-const axios = require('axios');
 var map, marker;
 
 const Map = () => {    
@@ -24,14 +24,14 @@ const Map = () => {
     let features = [];
 
     const isDesktop = useMediaQuery('(min-width:426px)'); 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [globalState, globalActions] = useGlobal();
     const [error, setError] = React.useState({ message: "" });
     const [clickInfo, setClickInfo] = React.useState(true);
     const [state, setState] = useState({
         "open": false,
-        "hasSponse": null,
+        "hasSponsor": null,
         "treeId": null,
         "sortenId": null,
         "reihe": null,
@@ -63,7 +63,7 @@ const Map = () => {
         });
     }    
 
-    const getIcon = (feature) => {
+    const getIcon = (feature) => {        
         const isFilteredMap = globalState.fruitTypeIds.length > 0; 
         const name = feature.getProperty("frucht");
         const hasSponsor = feature.getProperty("hasSponsor");
@@ -188,13 +188,14 @@ const Map = () => {
                     style={{ backgroundColor: 'rgb(236, 108, 63)' }}
                     message={"Klicke auf Bäume, um mehr Infos zu sehen."}
                 />
-            </Snackbar>}
+            </Snackbar>}        
+        {error.message &&
         <Snackbar open={error.message.length > 0} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
                 style={{ backgroundColor: 'rgb(211, 56, 47)' }}
                 message={error.message}
             />
-        </Snackbar>
+        </Snackbar>}
         {state.open &&
             <TreeInfoBox parentCallback={childData => setState({ "open": childData })}
                 key={new Date()}
@@ -203,16 +204,16 @@ const Map = () => {
                 treeId={state.treeId}
                 sortenId={state.sortenId}
                 hasSponsor={state.hasSponsor} />}
-        {globalState.fruitTypeIds.length > 0 && 
+        {globalState.fruitTypeIds && 
             <Chip
                 label={"Sortenfilter"}
                 onDelete={filterDelete}
                 color="primary"
                 style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
-        {globalState.fruitTypeIds.length < 1 && 
+        {!globalState.fruitTypeIds && 
             <Chip
                 label={"Zum Sortenfilter"}
-                onClick={() => history.push("/lieblingssorte")}
+                onClick={() => navigate("/lieblingssorte")}
                 color="primary"
                 style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
     </React.Fragment>

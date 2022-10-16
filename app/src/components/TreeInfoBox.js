@@ -5,8 +5,7 @@ import { Card, CardActions, CardContent, Typography, Grid, Button } from '@mater
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
-const axios = require('axios');
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     root: {

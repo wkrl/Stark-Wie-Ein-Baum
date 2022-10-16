@@ -67,10 +67,10 @@ const HomeMobile = () => {
                     <Typography variant="body2" color="secondary" gutterBottom>
                         Helfen Sie Familien mit einem schwer erkrankten Kind oder Jugendlichen. Unterstützen Sie gleichzeitig ein wichtiges Naturschutzprojekt.
                     </Typography> 
-                    <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{float: 'right', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>                
+                    <Button variant="contained" size="small" component={NavLink} to={"/anfrage"} style={{float: 'right', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Pate werden</Button>                
                 </Grid>                                
             </Grid>            
-            <Grid container justify="space-evenly" alignItems="center" className={classes.mapSection}>
+            <Grid container justifyContent="space-evenly" alignItems="center" className={classes.mapSection}>
                 <Grid item xs={12}>
                     <Typography variant="body1" color="primary" gutterBottom>
                         531 Bäume für den guten Zweck
@@ -84,15 +84,15 @@ const HomeMobile = () => {
                         <Typography variant="body2" color="secondary" gutterBottom style={{padding: '6px'}}>
                             Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.
                         </Typography>                        
-                        <Button variant="contained" size="small" style={{margin: '6px', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}} component={NavLink} to={() => "/karte"}>Zu den Bäumen</Button>                        
+                        <Button variant="contained" size="small" style={{margin: '6px', color: 'white', backgroundColor: 'rgb(236, 108, 63)'}} component={NavLink} to={"/karte"}>Zu den Bäumen</Button>                        
                     </Grid>                                   
                 </Grid>              
-                <Grid container direction="row" justify="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                                        
+                <Grid container direction="row" justifyContent="space-evenly" alignItems="center" style={{paddingTop: '22px'}}>                                        
                     <Grid item xs={6}>
-                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>                                        
+                        <Button variant="contained" size="small" component={NavLink} to={"/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>                                        
                     </Grid>
                     <Grid item xs={6}>
-                        <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>
+                        <Button variant="contained" size="small" component={NavLink} to={"/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>
                     </Grid>
                 </Grid>  
             </Grid>  

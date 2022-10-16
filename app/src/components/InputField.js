@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import useGlobal from "../store";
 
-const useStyles = makeStyles( theme => ({
+const useStyles = makeStyles(theme => ({
     input: {
         "-webkit-appearance": "none",
         "-moz-appearance": "none",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useGlobal from '../store';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -16,8 +16,7 @@ import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button';
 import FruitTypeList from '../components/FruitTypeList';
 import Grid from '@material-ui/core/Grid';
-
-const axios = require('axios');
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
 	desktopRoot: {        
@@ -72,7 +71,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const FruitTypes = () => {    
-    const history = useHistory();
+    const navigate = useNavigate();
     const classes = useStyles();
     const isDesktop = useMediaQuery('(min-width:426px)');
     const scrollRef = useRef(null);
@@ -133,7 +132,7 @@ const FruitTypes = () => {
         let ids = [];
         for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);      
         globalActions.updateState("fruitTypeIds", ids);
-        history.push("/karte"); 
+        navigate("/karte"); 
     }
 
     const getSliderLabel = () => {
@@ -157,7 +156,7 @@ const FruitTypes = () => {
                 <CardContent>
                     <Typography variant="h6" gutterBottom>Lieblingssorte</Typography>
                     <Typography variant="body1">
-                        Für <i>Stark wie ein Baum!</i> wurden 42 verschiedene, alte Obstbaumsorten gepflanzt. Viele diese Sorten sind heute vom Aussterben bedroht und man kennt sie nicht mehr. <Link style={{ color: "#ffa436" }} onClick={() => history.push("/sortenliste")}>Hier findet Ihr die komplette Liste</Link>. Um Euch die Auswahl zu erleichtern gibt es unseren Sortenfinder. Hier wählt Ihr einfach Eure Lieblings-Geschmacksrichtung aus und gebt an, wie Ihr die Früchte verwenden möchtet. Der Sortenfinder macht Euch dann Vorschläge. Wenn Ihr dann auf die Sortennamen klickt, erfahrt Ihr mehr über die vorgeschlagenen Sorten.
+                        Für <i>Stark wie ein Baum!</i> wurden 42 verschiedene, alte Obstbaumsorten gepflanzt. Viele diese Sorten sind heute vom Aussterben bedroht und man kennt sie nicht mehr. <Link style={{ color: "#ffa436" }} onClick={() => navigate("/sortenliste")}>Hier findet Ihr die komplette Liste</Link>. Um Euch die Auswahl zu erleichtern gibt es unseren Sortenfinder. Hier wählt Ihr einfach Eure Lieblings-Geschmacksrichtung aus und gebt an, wie Ihr die Früchte verwenden möchtet. Der Sortenfinder macht Euch dann Vorschläge. Wenn Ihr dann auf die Sortennamen klickt, erfahrt Ihr mehr über die vorgeschlagenen Sorten.
                     </Typography>
                 </CardContent>
             </Card>

@@ -1,5 +1,4 @@
-import React from 'react';
-import useGlobalHook from "use-global-hook";
+import globalHook from "use-global-hook";
 import * as actions from "../actions";
 
 const initialState = {
@@ -15,6 +14,6 @@ const initialState = {
     fruitTypeIds: [],    
 }
 
-const useGlobal = useGlobalHook(React, initialState, actions);
+const useGlobal = globalHook(initialState, actions);
 
 export default useGlobal;

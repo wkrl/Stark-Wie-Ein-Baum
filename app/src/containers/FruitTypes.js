@@ -11,8 +11,7 @@ import FruitTypeList from '../components/FruitTypeList';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-
-const axios = require('axios');
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
 	desktopRoot: {
@@ -47,7 +46,7 @@ const FruitTypes = () => {
 	const classes = useStyles();
 	const isDesktop = useMediaQuery('(min-width:426px)'); 
 
-	const [selectedFruit, setSelectedFruit] = useState({value: null});
+	const [selectedFruit, setSelectedFruit] = useState({value: ''});
 	const [fruitData, setFruitData] = useState({"Apfel": [], "Birne": [], "Quitte": [], "Pflaume": []});
 
 	const compareFruitTypes = (a, b) => {

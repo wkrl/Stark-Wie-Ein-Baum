@@ -2,14 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Button, Link, Card, useMediaQuery, useTheme } from '@material-ui/core';
+
 import backgroundImage from '../images/home/desktop/background.jpg'; 
+import SectionBackground from '../images/home/mobile/section_background.png'; 
 import Spende from '../images/home/desktop/spende.png'; 
 import Logo from '../images/logo.png'; 
 import LogoStiftung from '../images/logo_stiftung.jpg'; 
 import LogoCaritas from '../images/logo_caritas.jpg'; 
 import LogoLinkedIn from '../images/linked_in_logo.png'; 
-
-import SectionBackground from '../images/home/mobile/section_background.png'; 
 
 const useStyles = makeStyles(theme => ({           
     header: {    
@@ -93,10 +93,10 @@ const HomeDesktop = () => {
                 <Typography variant="body1" color="secondary" className={classes.subheading}>
                     Helfen Sie Familien mit einem schwer erkrankten Kind oder Jugendlichen. Unterstützen Sie gleichzeitig ein wichtiges Naturschutzprojekt.
                 </Typography>                
-                <Button variant="contained" size="small" component={NavLink} to={() => "/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', zIndex: '0.3'}}>Pate werden</Button>                        
+                <Button variant="contained" size="small" component={NavLink} to={"/anfrage"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', zIndex: '0.3'}}>Pate werden</Button>                        
             </Grid>
         </Grid>    
-        <Grid container justify="space-evenly" className={classes.cardContainer}>
+        <Grid container justifyContent="space-evenly" className={classes.cardContainer}>
             <Grid item container alignItems="stretch" xs={12}>
                 {!isTablet ? 
                 <React.Fragment>
@@ -116,15 +116,15 @@ const HomeDesktop = () => {
                                 <div className={classes.cardContent}>
                                     <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.</Typography>
                                 </div>                                                           
-                                <Grid container className={classes.mapButtonContainer} direction="row" justify="space-evenly" alignItems="center">                                    
+                                <Grid container className={classes.mapButtonContainer} direction="row" justifyContent="space-evenly" alignItems="center">                                    
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={"/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
                                     </Grid>         
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
+                                        <Button variant="contained" size="small" component={NavLink} to={"/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
                                     <Grid item xs={4}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
+                                        <Button variant="contained" size="small" component={NavLink} to={"/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
                                     </Grid>                                                                    
                                 </Grid>
                             </div>    
@@ -133,7 +133,7 @@ const HomeDesktop = () => {
                     <Grid item lg={4} xs={12}>
                         <Card className={classes.card}>   
                         <div style={{display: 'grid', gridTemplateRows: '3fr 2fr', height: '100%', textAlign: 'center'}}>
-                                <Grid container direction="row" justify="space-evenly" alignItems="center">
+                                <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                                     <Grid item xs={6}>
                                         <Link href="https://www.hof-grueneberg.de/stiftung/stiftung-hof-grueneberg/">
                                             <img className={classes.sectionLogo} src={LogoStiftung} alt="Stiftung Logo"></img>                    
@@ -145,7 +145,7 @@ const HomeDesktop = () => {
                                         </Link>
                                     </Grid>                                                                                
                                 </Grid>                                    
-                                <Grid container direction="row" justify="space-evenly" alignItems="center">
+                                <Grid container direction="row" justifyContent="space-evenly" alignItems="center">
                                     <Grid item xs={12}>
                                         <Link href="https://www.stark-wie-ein-Baum.de" underline="none">
                                             <Button variant="contained" size="small" style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)', placeSelf: 'center'}}>Mehr Infos</Button>
@@ -166,15 +166,15 @@ const HomeDesktop = () => {
                                 <Grid item className={classes.cardContent}>
                                     <Typography variant="body2" color="secondary">Entdecke auf der Karte die unterschiedlichen Bäume der Sorten Apfel, Birne, Pflaume und Quitte. Du kannst außerdem deine Lieblingssorte über den Sortenfinder finden, sowie alle gelisteten Sorten erkunden.</Typography>
                                 </Grid>         
-                                <Grid container justify="space-evenly" className={classes.mapButtonContainer} style={{padding: '18px'}}>
+                                <Grid container justifyContent="space-evenly" className={classes.mapButtonContainer} style={{padding: '18px'}}>
                                     <Grid item xs={3} style={{textAlign: 'center'}}>                                        
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
+                                        <Button variant="contained" size="small" component={NavLink} to={"/sortenliste"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Zu den Sorten</Button>
                                     </Grid>         
                                     <Grid item xs={3} style={{textAlign: 'center'}}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
+                                        <Button variant="contained" size="small" component={NavLink} to={"/karte"} style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}>Zu den Bäumen</Button>                                    
                                     </Grid>
                                     <Grid item xs={3} style={{textAlign: 'center'}}>
-                                        <Button variant="contained" size="small" component={NavLink} to={() => "/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
+                                        <Button variant="contained" size="small" component={NavLink} to={"/lieblingssorte"} style={{color: 'white', backgroundColor: 'rgb(226, 179, 79)'}}>Sorten finden</Button>                                        
                                     </Grid>
                                 </Grid>                                                                                                                                                   
                             </Grid>                                                 
@@ -189,7 +189,7 @@ const HomeDesktop = () => {
                     </Grid>
                     <Grid item lg={4} xs={12}>
                         <Card className={classes.card}>
-                            <Grid item container direction="row" alignItems="center" justify="space-evenly" className={classes.cardContent}>                                                                                                                                                             
+                            <Grid item container direction="row" alignItems="center" justifyContent="space-evenly" className={classes.cardContent}>                                                                                                                                                             
                                 <Grid item style={{padding: '15px 0 3px 0'}}>
                                     <Link href="https://www.hof-grueneberg.de/">
                                         <img className={classes.sectionLogo} src={LogoStiftung} alt="Stiftung Logo"></img>                    
