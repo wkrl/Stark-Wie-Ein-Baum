@@ -8,7 +8,7 @@ const Home = () => {
     const isDesktop = useMediaQuery('(min-width:426px)'); 
 
     return <React.Fragment>  
-        <NavBar isSticky></NavBar>              
+        <NavBar isSticky></NavBar>      
         {isDesktop ? 
             <HomeDesktop /> : 
             <HomeMobile />
