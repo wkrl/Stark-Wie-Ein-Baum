@@ -6,8 +6,7 @@ import slide1 from '../images/slider/slide1.jpg';
 import slide2 from '../images/slider/slide2.jpg'; 
 import slide3 from '../images/slider/slide3.jpg'; 
 import slide4 from '../images/slider/slide4.jpg'; 
-
-const axios = require('axios');
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
