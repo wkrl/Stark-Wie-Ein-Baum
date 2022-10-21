@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActions, CardContent, Typography, Grid, Button } from '@material-ui/core';
 import { Snackbar, SnackbarContent } from '@material-ui/core/';
@@ -52,10 +52,19 @@ const TreeInfoBox = (props) => {
     const [data, setData] = useState({response: null});
     const [error, setError] = useState("");
 
+    const navigate = useNavigate();
+    const redirectToContact = () => {
+        const options = { state: { 
+            treeId: props.treeId, 
+            treeName: data.response.sorte, 
+            reihe:  props.reihe,
+            pflanzreihePosition: props.pflanzreihePosition
+        }}
+        navigate("/anfrage", options)
+    }
+
     const handleClose = (_, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
+        if (reason === 'clickaway') return;
         setError(false);
     };
 
@@ -124,16 +133,7 @@ const TreeInfoBox = (props) => {
             </CardContent>
             <CardActions>
                 <Button size="small" 
-                    component={NavLink} 
-                    to={{
-                        pathname: "/anfrage", 
-                        state: { 
-                            treeId: props.treeId, 
-                            treeName: data.response.sorte, 
-                            reihe:  props.reihe,
-                            pflanzreihePosition: props.pflanzreihePosition
-                        }
-                    }}
+                    onClick={() => redirectToContact()}                    
                     variant="contained" 
                     style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}
                 >
