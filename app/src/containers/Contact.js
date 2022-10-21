@@ -129,7 +129,6 @@ const SignUp = () => {
                         <Typography className={classes.required} variant="body2" gutterBottom>Nachricht</Typography>
                     </Grid>
                     <Grid item xs={12}>     
-                        {console.log(location)}           
                         <InputField name="nachricht" selectedTree={location.state ? location.state : null} textArea></InputField>                     
                     </Grid>
                     <Grid item xs={12}>
