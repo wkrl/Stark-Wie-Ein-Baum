@@ -17,6 +17,8 @@ import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
 import axios from 'axios';
 
+import { GOOGLE_MAPS_API_KEY } from '../.env';
+
 var map, marker;
 
 const Map = () => {    
@@ -171,7 +173,7 @@ const Map = () => {
         if (!window.google) {
             let s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://maps.google.com/maps/api/js?key=AIzaSyCdyHnS8ib7S3WTpOe8TD1XjxGbWtHKb-o';
+            s.src = `https://maps.google.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`;
             let x = document.getElementsByTagName('script')[0];
             x.parentNode.insertBefore(s, x);
             s.addEventListener('load', () => onScriptLoad())

@@ -8,6 +8,7 @@ import { setTrainRouteMarkers, setOrchardRouteMarkers } from '../helpers/markers
 import TrainIcon from '@material-ui/icons/Train';
 import NatureIcon from '@material-ui/icons/Nature';
 
+import { GOOGLE_MAPS_API_KEY } from '../.env';
 
 var map, orchardPath, trainStationPath;
 
@@ -104,7 +105,7 @@ const RoutesMap = () => {
         if (!window.google) {
             let s = document.createElement('script');
             s.type = 'text/javascript';
-            s.src = 'https://maps.google.com/maps/api/js?key=AIzaSyCdyHnS8ib7S3WTpOe8TD1XjxGbWtHKb-o';
+            s.src = `https://maps.google.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}`;
             let x = document.getElementsByTagName('script')[0];
             x.parentNode.insertBefore(s, x);
             s.addEventListener('load', e => {
