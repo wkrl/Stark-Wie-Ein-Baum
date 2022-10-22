@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
 const TreeInfoBox = (props) => {
     const classes = useStyles();
     const [data, setData] = useState({response: null});
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
 
     const navigate = useNavigate();
     const redirectToContact = () => {
@@ -75,7 +75,7 @@ const TreeInfoBox = (props) => {
             setData({response: baumInfos});
         })
         .catch((e) => {
-            setError(e);
+            setError(true);
         });
     }, [props.sortenId]);
 
