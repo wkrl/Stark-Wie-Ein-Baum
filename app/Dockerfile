@@ -1,18 +1,13 @@
-# base image
-FROM node:12.2.0-alpine AS buildbase
+FROM node:18 AS buildbase
 
-# get code into container
-COPY . .
+# copy local build files into image
+COPY build .
 
 ENV env=production
-
-RUN npm install
-# start app
-RUN npm run-script build
-
 
 FROM buildbase
 
 RUN npm install -g serve
 
 CMD serve -s build -l 3000
+
