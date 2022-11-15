@@ -4,9 +4,7 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
     RouterProvider,
-    Route,
-    Routes,
-    BrowserRouter
+    Route
 } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
@@ -40,20 +38,20 @@ const theme = createTheme({
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <React.Fragment>       
+        <React.Fragment>
             <Route path="/" exact strict element={<Home/>} />
             <Route path="/karte" element={<MapView/>} />
             <Route path="/sortenliste" element={<FruitTypes/>} />
             <Route path="/lieblingssorte" element={<FavoriteFruit/>} />
             <Route path="/routen" element={<RoutesView/>} />
-            <Route path="/anfrage" element={<Contact/>} />                          
+            <Route path="/anfrage" element={<Contact/>} />
         </React.Fragment>)
   );
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<ThemeProvider theme={theme}>
-        <RouterProvider router={router}/>             
+        <RouterProvider router={router}/>
     </ThemeProvider>
 );
 
