@@ -12,6 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import { API_BASE_URL } from '../.env';
 
 const useStyles = makeStyles(theme => ({
 	desktopRoot: {
@@ -60,7 +61,7 @@ const FruitTypes = () => {
 	}
 
 	useEffect(() => {
-		axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")		
+		axios.get(`${API_BASE_URL}/api/karte/baeume`)
 		.then(response => {
 			response.data.forEach(type => {
 				const {frucht, sorte} = type;

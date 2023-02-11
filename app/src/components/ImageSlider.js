@@ -9,6 +9,8 @@ import slide3 from '../images/slider/slide3.jpg';
 import slide4 from '../images/slider/slide4.jpg';
 import axios from 'axios';
 
+import { API_BASE_URL } from '../.env';
+
 const useStyles = makeStyles({
     root: {
         zIndex: '-1',
@@ -27,7 +29,7 @@ const ImageSlider = () => {
     const [error, setError] = React.useState({ failedToLoadImages: false });
 
     useEffect(() => {
-        axios.get("https://swebapi.demo.datexis.com/api/karte/baeume/properties")
+        axios.get(`${API_BASE_URL}/api/karte/baeume/properties`)
         .then(response => {
             setImageLinks({ images: response.data.data })
             setimageFetched(true)
