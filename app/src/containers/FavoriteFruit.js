@@ -17,6 +17,7 @@ import Button from '@material-ui/core/Button';
 import FruitTypeList from '../components/FruitTypeList';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
+import { API_BASE_URL } from '../.env';
 
 const useStyles = makeStyles(theme => ({
 	desktopRoot: {        
@@ -145,7 +146,7 @@ const FruitTypes = () => {
     }
 
 	useEffect(() => {
-        if (!fruitTypes.length) axios.get("https://swebapi.demo.datexis.com/api/karte/baeume").then(response => setFruitTypes(sortData(response.data)));
+        if (!fruitTypes.length) axios.get(`${API_BASE_URL}/api/karte/baeume`).then(response => setFruitTypes(sortData(response.data)));
         if (filteredFruitTypes.length > 0) scrollRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 	}, [filteredFruitTypes.length, fruitTypes.length]);
 

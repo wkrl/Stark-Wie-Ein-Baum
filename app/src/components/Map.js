@@ -17,7 +17,7 @@ import deviceIcon from '../images/icons/device_location.svg';
 import mapPin from '../images/icons/map_pin.svg';
 import axios from 'axios';
 
-import { GOOGLE_MAPS_API_KEY } from '../.env';
+import { GOOGLE_MAPS_API_KEY, API_BASE_URL } from '../.env';
 
 var map, marker;
 
@@ -121,7 +121,7 @@ const Map = () => {
         }
 
         // Set map data
-        axios.get("https://swebapi.demo.datexis.com/api/karte")
+        axios.get(`${API_BASE_URL}/api/karte`)
             .then(response => filterResponseData(response))
             .then(response => {                
                 addResponseToFeatures(response.data);

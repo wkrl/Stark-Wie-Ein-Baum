@@ -6,6 +6,7 @@ import { Snackbar, SnackbarContent } from '@material-ui/core/';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
+import { API_BASE_URL } from '../.env';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -69,7 +70,7 @@ const TreeInfoBox = (props) => {
     };
 
     useEffect(() => {        
-        axios.get("https://swebapi.demo.datexis.com/api/karte/baeume")
+        axios.get(`${API_BASE_URL}/api/karte/baeume`)
         .then(response => {
             let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId)[0];
             setData({response: baumInfos});

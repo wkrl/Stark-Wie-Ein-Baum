@@ -6,9 +6,10 @@ import { Typography, Button, Grid, makeStyles, Snackbar, SnackbarContent } from 
 import useGlobal from '../store';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { API_BASE_URL } from '../.env';
 
 
-axios.defaults.baseURL = 'https://swebapi.demo.datexis.com'; 
+axios.defaults.baseURL = API_BASE_URL;
 
 const useStyles = makeStyles(theme => ({
     bg: {
