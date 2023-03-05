@@ -68,6 +68,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^7.4.0"
+    "concurrently": "^7.4.0",
+    "react-styleguidist": "^13.1.1"
   }
 }

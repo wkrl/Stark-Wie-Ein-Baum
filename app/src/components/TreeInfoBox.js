@@ -48,6 +48,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Komponente die eine Karte mit mehr Informationen zum Baum anzeigt.
+ *
+ * **Parameter**: `props`
+ * - `props.parentCallback` (*function*): Callback Funktion die den Parent aktualisiert nach einem Klick
+ * - `props.treeId` (*integer*): Baum ID
+ * - `props.sortenId` (*integer*): Sorten ID
+ * - `props.reihe` (*integer*): Erste Baumreihe
+ * - `props.pflanzreihePosition` (*integer*): Zweite Baumreihe
+ * - `props.hasSponsor` (*boolean*): Angabe ob der Baum bereits einen Sponsor hat
+ */
 const TreeInfoBox = (props) => {
     const classes = useStyles();
     const [data, setData] = useState({response: null});
@@ -55,9 +66,9 @@ const TreeInfoBox = (props) => {
 
     const navigate = useNavigate();
     const redirectToContact = () => {
-        const options = { state: { 
-            treeId: props.treeId, 
-            treeName: data.response.sorte, 
+        const options = { state: {
+            treeId: props.treeId,
+            treeName: data.response.sorte,
             reihe:  props.reihe,
             pflanzreihePosition: props.pflanzreihePosition
         }}
@@ -69,7 +80,7 @@ const TreeInfoBox = (props) => {
         setError(false);
     };
 
-    useEffect(() => {        
+    useEffect(() => {
         axios.get(`${API_BASE_URL}/api/karte/baeume`)
         .then(response => {
             let baumInfos = response.data.filter(sorte => sorte.id === props.sortenId)[0];
@@ -81,18 +92,18 @@ const TreeInfoBox = (props) => {
     }, [props.sortenId]);
 
     return <div className={classes.root}>
-        {data.response && 
-        <Card className={classes.card}>                        
+        {data.response &&
+        <Card className={classes.card}>
             <CardContent>
                 <IconButton style={{float: 'right'}} onClick={() => props.parentCallback(false)}>
                     <CloseIcon />
-                </IconButton>  
+                </IconButton>
                 <Typography variant="h5">
                     {`${data.response.sorte} - Baum ${props.treeId}`}
-                </Typography>       
-                <Typography variant="h6" gutterBottom>                    
+                </Typography>
+                <Typography variant="h6" gutterBottom>
                     {`Reihe ${props.reihe}, Baum ${props.pflanzreihePosition}`}
-                </Typography>                          
+                </Typography>
                 <div className={classes.content}>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
@@ -110,13 +121,13 @@ const TreeInfoBox = (props) => {
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Früchte und Baumwuchs</Typography>
                             <Typography variant="body2">{data.response.beschreibung}</Typography>
-                            <Typography variant="body2">{data.response.groesse}</Typography>                            
+                            <Typography variant="body2">{data.response.groesse}</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Reifezeit und Lagerfähigkeit</Typography>
                             <Typography variant="body2">{data.response.reifezeit}</Typography>
-                            <Typography variant="body2">Die Lagerzeit beträgt {data.response.lagerfaehigkeit} {data.response.lagerfaehigkeit > 1 ? "Monate" : data.response.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
-                        </Grid>              
+                            <Typography variant="body2">Die Lagerzeit beträgt {data.response.lagerfaehigkeit} {data.response.lagerfaehigkeit > 1 ? "Monate" : data.response.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "einen Monat"}.</Typography>
+                        </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Andere Namen</Typography>
                             <Typography variant="body2">{data.response.andereNamen}</Typography>
@@ -124,22 +135,22 @@ const TreeInfoBox = (props) => {
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Herkunft</Typography>
                             <Typography variant="body2">{data.response.herkunft}</Typography>
-                        </Grid>                                  
+                        </Grid>
                         <Grid item xs={12}>
                             <Typography variant="subtitle1">Verbreitung</Typography>
                             <Typography variant="body2">{data.response.verbreitung}</Typography>
                         </Grid>
-                    </Grid>                       
+                    </Grid>
                 </div>
             </CardContent>
             <CardActions>
-                <Button size="small" 
-                    onClick={() => redirectToContact()}                    
-                    variant="contained" 
+                <Button size="small"
+                    onClick={() => redirectToContact()}
+                    variant="contained"
                     style={{color: 'white', backgroundColor: 'rgb(236, 108, 63)'}}
                 >
                     Pate werden
-                </Button>                
+                </Button>
             </CardActions>
         </Card>}
         <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
@@ -147,7 +158,7 @@ const TreeInfoBox = (props) => {
                 style={{
                     backgroundColor: 'rgb(211, 56, 47)',
                 }}
-                message={                          
+                message={
                     "Bauminfos konnten nicht geladen werden!"
                 }
             />

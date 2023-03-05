@@ -21,6 +21,12 @@ const useStyles = makeStyles({
     },
 });
 
+/**
+ * Komponente die ein Bild-Slider mit dem `nuka-carousel` package anzeigt,
+ * der die Slides automatisch wechselt. Die Bilder werden vom Backend dynamisch geladen.
+ *
+ * **Parameter**:
+ */
 const ImageSlider = () => {
     const classes = useStyles();
     const backupImages = [slide0, slide1, slide2, slide3, slide4];

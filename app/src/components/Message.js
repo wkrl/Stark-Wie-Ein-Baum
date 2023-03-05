@@ -33,6 +33,12 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+/**
+ * Komponente die eine temporäre Pop-Up Nachricht anzeigt.
+ *
+ * **Parameter**: `props`
+ * - `props.value` (*string*): Variante des Pop-Ups die den Style und Text ändert
+ */
 const Message = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);

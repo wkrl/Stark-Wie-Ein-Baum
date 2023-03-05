@@ -30,6 +30,12 @@ const useStyles = makeStyles({
     }
 });
 
+/**
+ * Komponente die eine Karte anzeigt und Routen zwischen den Hof, Bahnhof und der Wiese darstellt.
+ * Auch hier wird der Standort des Nutzers abgefragt und als roter Pin angezeigt.
+ *
+ * **Parameter**:
+ */
 const RoutesMap = () => {
     const classes = useStyles();
     const [route, setRoute] = useState("");

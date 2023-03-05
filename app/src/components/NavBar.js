@@ -28,7 +28,6 @@ const useStyles = makeStyles(theme => ({
     },
     appbar: {
       background: theme.background,
-      // boxShadow: 'none',
     },
     title: {
       flexGrow: 1,
@@ -39,6 +38,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+/**
+ * Komponente die eine Navigations-Leiste am Rand des Bildschirms anzeigt.
+ *
+ * **Parameter**: `props`
+ * - `props.isSticky` (*boolean*): Angabe ob die Position der Leiste sticky ist
+ */
 const NavBar = (props) => {
     const classes = useStyles();
     const [state, setState] = React.useState({

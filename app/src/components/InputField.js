@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         "-moz-appearance": "none",
         "appearance": "none",
 
-        width: "100%",        
+        width: "100%",
         marginBottom: "8px",
         fontFamily: "'Open Sans', sans-serif",
         fontSize: "14px",
@@ -16,20 +16,31 @@ const useStyles = makeStyles(theme => ({
         color: "#414141",
         background: "#ECECEC",
         borderRadius: "12px",
-        border: "8px solid #ECECEC",        
+        border: "8px solid #ECECEC",
         outline: "none",
-        boxSizing: "border-box",  
+        boxSizing: "border-box",
     },
 }))
 
+/**
+ * Komponente die im Kontakt-Formular als Eingabe-Feld wiederverwendet wird.
+ *
+ * **Parameter**: `props`
+ * - `props.name` (*string*): Referenz auf die im globalen State zu aktualisierende Variable (siehe `src/store/index.js`)
+ * - `props.value` (*string*): Platzhalter im Feld
+ * - `props.selectedTree` (*object*): Detail-Informationen zum angeklickten Baum
+ * - `props.hidden` (*boolean*): Sichtbarkeit der Feld-Eingabe
+ * - `props.name` (*string*): HTML-Typ des Feldes
+ * - `props.textArea` (*boolean*): Angabe ob das Feld als großes Area-Feld angezeigt werden soll
+ */
 const InputField = (props) => {
     const classes = useStyles();
     const [globalState, globalActions] = useGlobal();
 
     const getInputType = () => {
         if (props.hidden) return "password";
-        if (props.name === "email") return "email"; 
-        return "text"; 
+        if (props.name === "email") return "email";
+        return "text";
     }
 
     useEffect(() => {
@@ -41,28 +52,28 @@ const InputField = (props) => {
         }
     }, [props.selectedTree])
 
-    return <React.Fragment>        
-        {props.textArea ? 
-            <textarea 
+    return <React.Fragment>
+        {props.textArea ?
+            <textarea
                 className={classes.input}
                 rows="5"
-                placeholder={props.value}                
+                placeholder={props.value}
                 maxLength="800"
                 value={globalState[props.name]}
                 style={{resize: 'none', }}
                 onChange={(e) =>
                     globalActions.updateState(props.name, e.target.value)
                 }
-            /> : 
+            /> :
             <input type={getInputType()}
                 className={classes.input}
-                placeholder={props.value}                
+                placeholder={props.value}
                 maxLength="240"
                 onChange={(e) =>
                     globalActions.updateState(props.name, e.target.value)
                 }
             />
-        }        
+        }
     </React.Fragment>
 }
 

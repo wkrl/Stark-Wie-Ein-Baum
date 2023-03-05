@@ -9,12 +9,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() => ({
-	fruitLabel: {        
+	fruitLabel: {
         color: 'gray',
         paddingLeft: '12px',
-    },	  
+    },
 }));
 
+/**
+ * Komponente die mehr Details zu der Fruchtsorte eines Baumes
+ * als Overlay auf der Karte wiedergibt.
+ *
+ * **Parameter**: `props`
+ * - `props.sorte` (*string*): Sortenname der Frucht
+ * - `props.frucht` (*string*): Fruchtname
+ * - `props.geschmack` (*string*): Geschmacksrichtung
+ * - `props.verwendung` (*string*): Verwendungen der Frucht
+ * - `props.beschreibung` (*string*): Nähere Beschreibung
+ * - `props.groesse` (*string*): Größe der Frucht
+ * - `props.reifezeit` (*string*): Reifezeit
+ * - `props.lagerfaehigkeit` (*integer*): Anzahl der Monate für Lagerung
+ * - `props.andereNamen` (*string*): Weitere Namen
+ * - `props.herkunft` (*string*): Herkunft der Frucht
+ * - `props.verbreitung` (*string*): Verbreitung auf den Kontinenten
+ */
 const FruitTypeList = props => {
     const classes = useStyles();
     const [moreInfo, setMoreInfo] = useState(false);
@@ -25,71 +42,71 @@ const FruitTypeList = props => {
             aria-controls="panel1a-content"
             id="panel1a-header"
         >
-            <Grid container>                
+            <Grid container>
                 <Typography>{props.sorte}</Typography>
                 <Typography variant="body1" className={classes.fruitLabel}>{props.frucht}</Typography>
-            </Grid>                                    
+            </Grid>
         </AccordionSummary>
         <AccordionDetails>
             <Typography variant="body1">{props.geschmack}</Typography>
         </AccordionDetails>
         {!moreInfo && <AccordionDetails>
-            <Button onClick={() => setMoreInfo(!moreInfo)}>Mehr Infos</Button>        
+            <Button onClick={() => setMoreInfo(!moreInfo)}>Mehr Infos</Button>
         </AccordionDetails>}
-        {moreInfo && <div>           
-            <AccordionDetails>        
+        {moreInfo && <div>
+            <AccordionDetails>
                 <Grid item xs={5} lg={2}>
-                    <Typography variant="body1">Verwendung</Typography>            
-                </Grid>    
+                    <Typography variant="body1">Verwendung</Typography>
+                </Grid>
                 <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.verwendung}</Typography>
-                </Grid>                                  
+                </Grid>
             </AccordionDetails>
-            <AccordionDetails>        
-                <Grid item xs={5} lg={2}>                    
-                    <Typography variant="body1">Früchte und Baumwuchs</Typography>            
-                </Grid>    
+            <AccordionDetails>
+                <Grid item xs={5} lg={2}>
+                    <Typography variant="body1">Früchte und Baumwuchs</Typography>
+                </Grid>
                 <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.beschreibung} {props.groesse}</Typography>
-                </Grid>                                  
+                </Grid>
             </AccordionDetails>
-            <AccordionDetails>        
-                <Grid item xs={5} lg={2}>                 
-                    <Typography variant="body1">Reifezeit und Lagerfähigkeit</Typography>            
-                </Grid>    
-                <Grid item xs={7} lg={10}>
-                    <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "Monat"}.</Typography>
-                </Grid>                                  
-            </AccordionDetails>
-            <AccordionDetails>        
+            <AccordionDetails>
                 <Grid item xs={5} lg={2}>
-                    <Typography variant="body1">Andere Namen</Typography>            
-                </Grid>    
+                    <Typography variant="body1">Reifezeit und Lagerfähigkeit</Typography>
+                </Grid>
+                <Grid item xs={7} lg={10}>
+                    <Typography variant="body2">{props.reifezeit} Die Lagerzeit beträgt {props.lagerfaehigkeit} {props.lagerfaehigkeit > 1 ? "Monate" : props.lagerfaehigkeit === 0 ? "weniger als einen Monat" : "einen Monat"}.</Typography>
+                </Grid>
+            </AccordionDetails>
+            <AccordionDetails>
+                <Grid item xs={5} lg={2}>
+                    <Typography variant="body1">Andere Namen</Typography>
+                </Grid>
                 <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.andereNamen}</Typography>
-                </Grid>                                  
+                </Grid>
             </AccordionDetails>
-            <AccordionDetails>        
+            <AccordionDetails>
                 <Grid item xs={5} lg={2}>
-                    <Typography variant="body1">Herkunft</Typography>            
-                </Grid>    
+                    <Typography variant="body1">Herkunft</Typography>
+                </Grid>
                 <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.herkunft}</Typography>
-                </Grid>                                  
-            </AccordionDetails>        
-            <AccordionDetails>        
+                </Grid>
+            </AccordionDetails>
+            <AccordionDetails>
                 <Grid item xs={5} lg={2}>
-                    <Typography variant="body1">Verbreitung</Typography>            
-                </Grid>    
+                    <Typography variant="body1">Verbreitung</Typography>
+                </Grid>
                 <Grid item xs={7} lg={10}>
                     <Typography variant="body2">{props.verbreitung}</Typography>
-                </Grid>                                  
-            </AccordionDetails>                
-            <AccordionDetails>
-                <Button onClick={() => setMoreInfo(!moreInfo)}>Weniger Infos</Button>        
+                </Grid>
             </AccordionDetails>
-        </div>}   
+            <AccordionDetails>
+                <Button onClick={() => setMoreInfo(!moreInfo)}>Weniger Infos</Button>
+            </AccordionDetails>
+        </div>}
     </Accordion>
 }
 
-export default FruitTypeList; 
+export default FruitTypeList;
