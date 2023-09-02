@@ -21,11 +21,11 @@ import { GOOGLE_MAPS_API_KEY, API_BASE_URL } from '../.env';
 
 var map, marker;
 
-const Map = () => {    
+const Map = () => {
     let clickedIconId;
     let features = [];
 
-    const isDesktop = useMediaQuery('(min-width:426px)'); 
+    const isDesktop = useMediaQuery('(min-width:426px)');
     const navigate = useNavigate();
 
     const [globalState, globalActions] = useGlobal();
@@ -41,7 +41,7 @@ const Map = () => {
     });
 
     const handleClose = (_, reason) => {
-        if (reason === 'clickaway') return;        
+        if (reason === 'clickaway') return;
         setError({ message: "" });
         setClickInfo(false);
     };
@@ -50,44 +50,44 @@ const Map = () => {
         data.forEach(tree => {
             let feature = {
                 "geometry": { "coordinates": [tree.Latitude, tree.Longitude], "type": "Point" },
-                "properties": { 
-                    "hasSponsor": !!tree.PatenID, 
-                    "treeId": tree.BaumNr, 
-                    "sortenId": tree.SortenID, 
-                    "frucht": tree.Frucht, 
-                    "reihe": tree.Pflanzreihe, 
-                    "pflanzreihePosition": tree.PflanzreihePosition 
+                "properties": {
+                    "hasSponsor": !!tree.PatenID,
+                    "treeId": tree.BaumNr,
+                    "sortenId": tree.SortenID,
+                    "frucht": tree.Frucht,
+                    "reihe": tree.Pflanzreihe,
+                    "pflanzreihePosition": tree.PflanzreihePosition
                 },
                 "type": "Feature",
                 "id": tree.BaumNr,
             }
             features.push(feature);
         });
-    }    
+    }
 
-    const getIcon = (feature) => {        
-        const isFilteredMap = globalState.fruitTypeIds.length > 0; 
+    const getIcon = (feature) => {
+        const isFilteredMap = globalState.fruitTypeIds.length > 0;
         const name = feature.getProperty("frucht");
         const hasSponsor = feature.getProperty("hasSponsor");
 
         if (name === "Apfel") return isFilteredMap ? !hasSponsor ? apfelIcon : grayApfelIcon : apfelIcon;
         if (name === "Quitte") return isFilteredMap ? !hasSponsor ? quitteIcon : grayQuitteIcon : quitteIcon;
         if (name === "Pflaume") return isFilteredMap ? !hasSponsor ? pflaumeIcon : grayPflaumeIcon : pflaumeIcon;
-        if (name === "Birne") return isFilteredMap? !hasSponsor ? birneIcon : grayBirneIcon : birneIcon;    
+        if (name === "Birne") return isFilteredMap? !hasSponsor ? birneIcon : grayBirneIcon : birneIcon;
     }
 
-    const changeGeoJsonIcons = () => {        
-        map.data.setStyle(feature => { return ({ icon: { url: getIcon(feature) } }) });        
-    } 
+    const changeGeoJsonIcons = () => {
+        map.data.setStyle(feature => { return ({ icon: { url: getIcon(feature) } }) });
+    }
 
     const filterResponseData = response => {
         if (globalState.fruitTypeIds.length > 0) {
-            return {...response, data: response.data.filter(tree => globalState.fruitTypeIds.indexOf(tree.SortenID) > -1)};         
+            return {...response, data: response.data.filter(tree => globalState.fruitTypeIds.indexOf(tree.SortenID) > -1)};
         }
         return response;
     }
 
-    const filterDelete = () => globalActions.updateState("fruitTypeIds", []);    
+    const filterDelete = () => globalActions.updateState("fruitTypeIds", []);
 
     const onScriptLoad = () => {
         map = new window.google.maps.Map(
@@ -97,12 +97,12 @@ const Map = () => {
 
         let iconImage = new window.google.maps.MarkerImage(
             deviceIcon,
-            new window.google.maps.Size(95, 95), // icon width and height 
+            new window.google.maps.Size(95, 95), // icon width and height
             new window.google.maps.Point(0, 0),
             new window.google.maps.Point(47, 47) // icon anchor
         );
 
-        const updateLocationMarker = pos => marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));        
+        const updateLocationMarker = pos => marker.setPosition(new window.google.maps.LatLng({ lat: pos.coords.latitude, lng: pos.coords.longitude }));
 
         const initDeviceLocationMarker = () => {
             let options = { enableHighAccuracy: true, timeout: 3000 };
@@ -123,7 +123,7 @@ const Map = () => {
         // Set map data
         axios.get(`${API_BASE_URL}/api/karte`)
             .then(response => filterResponseData(response))
-            .then(response => {                
+            .then(response => {
                 addResponseToFeatures(response.data);
                 if (navigator.geolocation) {
                     initDeviceLocationMarker();
@@ -190,7 +190,7 @@ const Map = () => {
                     style={{ backgroundColor: 'rgb(236, 108, 63)' }}
                     message={"Klicke auf Bäume, um mehr Infos zu sehen."}
                 />
-            </Snackbar>}        
+            </Snackbar>}
         {error.message &&
         <Snackbar open={error.message.length > 0} autoHideDuration={6000} onClose={handleClose}>
             <SnackbarContent
@@ -206,13 +206,14 @@ const Map = () => {
                 treeId={state.treeId}
                 sortenId={state.sortenId}
                 hasSponsor={state.hasSponsor} />}
-        {globalState.fruitTypeIds && 
+        {globalState.fruitTypeIds &&
             <Chip
                 label={"Sortenfilter"}
+                onClick={() => navigate("/lieblingssorte")}
                 onDelete={filterDelete}
                 color="primary"
                 style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
-        {!globalState.fruitTypeIds && 
+        {!globalState.fruitTypeIds &&
             <Chip
                 label={"Zum Sortenfilter"}
                 onClick={() => navigate("/lieblingssorte")}
