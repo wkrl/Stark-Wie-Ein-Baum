@@ -206,14 +206,14 @@ const Map = () => {
                 treeId={state.treeId}
                 sortenId={state.sortenId}
                 hasSponsor={state.hasSponsor} />}
-        {globalState.fruitTypeIds &&
+        {globalState.fruitTypeIds.length &&
             <Chip
                 label={"Sortenfilter"}
                 onClick={() => navigate("/lieblingssorte")}
                 onDelete={filterDelete}
                 color="primary"
                 style={{ position: 'absolute', top: isDesktop ? '82px' : '72px', left: '12px', zIndex: '1' }} />}
-        {!globalState.fruitTypeIds &&
+        {!globalState.fruitTypeIds.length &&
             <Chip
                 label={"Zum Sortenfilter"}
                 onClick={() => navigate("/lieblingssorte")}
