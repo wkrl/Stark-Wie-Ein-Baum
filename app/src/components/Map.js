@@ -109,7 +109,7 @@ const Map = () => {
 
             navigator.geolocation.getCurrentPosition(pos => {
                 let position = new window.google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                marker = new window.google.maps.Marker({ position, map, icon: iconImage });
+                marker = new window.google.maps.Marker({ position, map, icon: iconImage, optimized: false, zIndex: 99999999 });
                 marker.setMap(map);
 
                 navigator.geolocation.watchPosition(
