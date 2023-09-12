@@ -20,7 +20,7 @@ import axios from 'axios';
 import { API_BASE_URL } from '../.env';
 
 const useStyles = makeStyles(theme => ({
-	desktopRoot: {        
+	desktopRoot: {
 		backgroundColor: theme.background,
 		minHeight: '100vh',
         padding: '5vh 10vw 5vh 10vw',
@@ -39,101 +39,105 @@ const useStyles = makeStyles(theme => ({
         }
     },
     mobileSubmitButton: {
-        margin: '6px', 
-        display: 'block', 
+        margin: '6px',
+        display: 'block',
         width: '100%'
     },
-    desktopSubmitButton: {  
+    desktopSubmitButton: {
         margin: '0 0 12px 6px',
     },
     sliderLabel: {
         marginLeft: '6px',
     },
     listWrapper: {
-        margin: '12px',    
-    },    
+        margin: '12px',
+    },
     listContainer: {
         paddingBottom: '8px',
     },
     mobileMapButton: {
-        width: '100%',  
-        paddingTop: '5px',       
-        color: 'white', 
-        backgroundColor: 'rgb(236, 108, 63)',        
+        width: '100%',
+        paddingTop: '5px',
+        color: 'white',
+        backgroundColor: 'rgb(236, 108, 63)',
     },
     desktopMapButton: {
-        float: 'right',         
-        color: 'white', 
-        backgroundColor: 'rgb(236, 108, 63)',    
+        float: 'right',
+        color: 'white',
+        backgroundColor: 'rgb(236, 108, 63)',
         '&:hover': {
-            backgroundColor: 'rgb(236, 108, 63)',        
-        }    
-    },  
+            backgroundColor: 'rgb(236, 108, 63)',
+        }
+    },
 }));
 
-const FruitTypes = () => {    
+const FruitTypes = () => {
     const navigate = useNavigate();
     const classes = useStyles();
     const isDesktop = useMediaQuery('(min-width:426px)');
     const scrollRef = useRef(null);
-    
+
     const [fruitTypes, setFruitTypes] = useState([]);
     const [filteredFruitTypes, setFilteredFruitTypes] = useState([]);
     const [months, setMonths] = useState(0);
     const [userSelection, setUserSelection] = useState({
-        "frucht": {}, 
-        "geschmackID": {}, 
-        "verwendung": {},       
-        "lagerfaehigkeit": null,  
+        "frucht": {},
+        "geschmackID": {},
+        "verwendung": {},
+        "lagerfaehigkeit": null,
     });
     const [, globalActions] = useGlobal();
-    
-    const handleCheck = (event, prefix) => {     
-        let copy = {...userSelection};        
+
+    const handleCheck = (event, prefix) => {
+        let copy = {...userSelection};
         copy[prefix][event.target.name] = event.target.checked;
-        setUserSelection(copy);                        
+        setUserSelection(copy);
     };
 
     const handleSlide = (value, name) => {
         setMonths(value);
         setUserSelection({...userSelection, [name]: value});
-    };        
-
-    const binarySelectionFilter = (item, query) => {         
-        if (Object.entries(userSelection[query]).length === 0) return true; // No filter set
-        let options = []; 
-        for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);        
-        if (options.length === 0) return true;
-        for (let option of options) if (!!item[option]) return true;        
     };
 
-    const valueSelectionFilter = (item, query) => {
+    const binarySelectionFilter = (item, query) => {
+        // Check if any key in the selection object is set to true
+        const anyValueIsTrue = Object.values(userSelection[query]).some(value => value === true);
+        if (!anyValueIsTrue) return true; // No filter set
+
+        // Aggregate user selections for filtering
+        let options = [];
+        for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);
+        if (options.length === 0) return true;
+        for (let option of options) if (!!item[option]) return true;
+    };
+
+    const minValueSelectionFilter = (item, query) => {
         if (!userSelection[query]) return true; // No filter set
-        return item[query] >= userSelection[query];        
+        return item[query] >= userSelection[query];
     }
 
     const multipleSelectionFilter = (item, query) => {
         if (Object.entries(userSelection[query]).length === 0) return true; // No filter set
         let options = [];
-        for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);      
-        if (options.length === 0) return true;        
+        for (const [key, value] of Object.entries(userSelection[query])) if (value) options.push(key);
+        if (options.length === 0) return true;
         for (let option of options) if (item[query] == option) return true;
     }
 
-    const filterFruitTypes = () => {        
+    const filterFruitTypes = () => {
         let filteredTypes = fruitTypes
             .filter(item => { return multipleSelectionFilter(item, "frucht") })
             .filter(item => { return multipleSelectionFilter(item, "geschmackID") })
             .filter(item => { return binarySelectionFilter(item, "verwendung") })
-            .filter(item => { return valueSelectionFilter(item, "lagerfaehigkeit") });
-        setFilteredFruitTypes(filteredTypes);           
+            .filter(item => { return minValueSelectionFilter(item, "lagerfaehigkeit") });
+        setFilteredFruitTypes(filteredTypes);
     }
 
     const redirectToMapWithFruitTypes = () => {
         let ids = [];
-        for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);      
+        for (let fruitType of filteredFruitTypes) ids.push(fruitType.id);
         globalActions.updateState("fruitTypeIds", ids);
-        navigate("/karte"); 
+        navigate("/karte");
     }
 
     const getSliderLabel = () => {
@@ -141,8 +145,9 @@ const FruitTypes = () => {
         if (months === 0) return "Nur kurz";
     }
 
+    // Sort response data by fruit type of items
     const sortData = data => {
-        return data.sort((a, b) => a.sorte < b.sorte ? -1 : a.sorte > b.sorte ? 1 : 0); 
+        return data.sort((a, b) => a.sorte < b.sorte ? -1 : a.sorte > b.sorte ? 1 : 0);
     }
 
 	useEffect(() => {
@@ -163,7 +168,7 @@ const FruitTypes = () => {
             </Card>
             <Card>
                 <CardContent>
-                    <Typography variant="h6" gutterBottom>Sortenfinder</Typography>                    
+                    <Typography variant="h6" gutterBottom>Sortenfinder</Typography>
                     <Typography variant="body1" style={{paddingTop: '4px'}} gutterBottom>Lieblingsfrucht / früchte:</Typography>
                     <FormGroup row>
                         <FormControlLabel
@@ -203,11 +208,11 @@ const FruitTypes = () => {
                             control={<Checkbox checked={!!userSelection.geschmackID["4"]} onChange={e => handleCheck(e, "geschmackID")} name="4" />}
                             label="süß-säuerlich"
                         />
-                    </FormGroup>                    
+                    </FormGroup>
                 </CardContent>
                 <CardContent>
                     <Typography variant="body1" gutterBottom>Das möchte ich vor allem mit meinem Obst machen:</Typography>
-                    <FormGroup row>                        
+                    <FormGroup row>
                         <FormControlLabel
                             control={<Checkbox checked={!!userSelection.verwendung.tafelobst} onChange={e => handleCheck(e, "verwendung")} name="tafelobst" />}
                             label="Frisch essen"
@@ -218,9 +223,9 @@ const FruitTypes = () => {
                         />
                         <FormControlLabel
                             control={<Checkbox checked={!!userSelection.verwendung.trinken} onChange={e => handleCheck(e, "verwendung")} name="trinken" />}
-                            label="Saft, Wein, Obstler"                            
+                            label="Saft, Wein, Obstler"
                         />
-                    </FormGroup>                    
+                    </FormGroup>
                 </CardContent>
                 <CardContent>
                     <FormGroup row>
@@ -244,31 +249,31 @@ const FruitTypes = () => {
                         </Typography>
                     </FormGroup>
                 </CardContent>
-                <CardActions>                
-                    <Button className={isDesktop ? classes.desktopSubmitButton : classes.mobileSubmitButton} variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>                    
+                <CardActions>
+                    <Button className={isDesktop ? classes.desktopSubmitButton : classes.mobileSubmitButton} variant="outlined" onClick={filterFruitTypes}>Sorten finden</Button>
                 </CardActions>
-            </Card>                                       
+            </Card>
             {filteredFruitTypes.length > 0 && <Card ref={scrollRef}>
                 <CardContent>
-                    <Grid container>                        
+                    <Grid container>
                         <Grid item xs={12} md={6}>
                             <Typography variant="h6" gutterBottom>
-                                {isDesktop ? "Das sind die Sorten, die zu dir passen" : filteredFruitTypes.length === 1 ? "Deine Sorte" : "Deine Sorten"}                          
+                                {isDesktop ? "Das sind die Sorten, die zu dir passen" : filteredFruitTypes.length === 1 ? "Deine Sorte" : "Deine Sorten"}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <div style={{display: 'block'}}>
                                 <Button className={isDesktop ? classes.desktopMapButton : classes.mobileMapButton} variant="contained" onClick={redirectToMapWithFruitTypes}>Zur Karte</Button>
                             </div>
-                        </Grid>                   
-                    </Grid>                    
+                        </Grid>
+                    </Grid>
                 </CardContent>
                 <div className={classes.listWrapper}>
-                    {filteredFruitTypes.map((fruitType, index) => <div className={classes.listContainer} key={index+Date.now()}><FruitTypeList {...fruitType} /></div>)}                
-                </div>                
-            </Card>}                     
+                    {filteredFruitTypes.map((fruitType, index) => <div className={classes.listContainer} key={index+Date.now()}><FruitTypeList {...fruitType} /></div>)}
+                </div>
+            </Card>}
         </div>
 	</React.Fragment>
 }
 
-export default FruitTypes; 
+export default FruitTypes;
